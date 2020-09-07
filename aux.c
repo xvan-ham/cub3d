@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:12:28 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/01 17:30:41 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/03 18:38:51 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_vectors_initialise(t_vectors *v)
 	v->flag_stuck = 0;
 	v->orientation = W;
 	v->fov = 0.66;//0.66
+	v->map_height = 0;
+	v->map_width = 0;
 	v->map_y = 0;
 	v->map_x = 0;
 	v->pos_y = 0;	
@@ -66,6 +68,7 @@ void	ft_vectors_initialise(t_vectors *v)
 	v->wall_y = 0;
 	v->wall_x = 0;//used?
 	v->n_textures = N_TEXTURES;
+	v->flag_sprites = 0;//used?
 	if (!(v->textures = (t_texture **)malloc(sizeof(t_texture *))))
 		ft_error("Not enough memory for texture array (malloc)");
 	if (!(v->tex_files = (char **)malloc(sizeof(char *) * 4)))
@@ -117,6 +120,17 @@ int		digits(int n)
 	return (digits);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	if (!s)
+		return (0);
+	while (*s && *s != c)
+		s++;
+	if (*s == c)
+		return ((char *)s);
+	return (0);
+}	
+
 void	ft_error(char *s)
 {
 	ft_putstr("\nFatal Error: ");
@@ -125,16 +139,44 @@ void	ft_error(char *s)
 	exit(1);
 }
 
-char	*ft_strdup(const char *s)
+/*
+** Function: char	*ft_strndup(const char *src, size_t chars)
+** Allocates sufficient memory for a freeable copy of the string
+** 'src', does the copy, and returns a pointer to it.
+** Copies at most 'chars' characters from the string
+** 'src' always NUL terminating the copied string.
+*/
+
+char	*ft_strndup(const char *src, size_t chars)
 {
 	char	*str;
-	char	*str_s;
+	char	*strptr;
 
-	if (!(str = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))))
+	if (!src)
 		return (0);
-		str_s = str;
-	while(*s)
-		*(str++) = *(s++);
-	*str = 0;
-	return (str_s);
+	if (!(str = malloc((chars + 1) * sizeof(char))))
+		return (0);
+	strptr = str;
+	while (*src && chars--)
+		*(strptr++) = *(src++);
+	*strptr = 0;
+	return (str);
+}
+
+int		ft_atoi(const char *string)
+{
+	int	sign;
+	int	total;
+
+	sign = 1;
+	total = 0;
+	while (*string == 32 || (*string > 8 && *string < 14))
+		string++;
+	if (*string == '-')
+		sign *= -1;
+	if (*string == '-' || *string == '+')
+		string++;
+	while (*string && *string >= 48 && *string <= 57)
+		total = total * 10 + (*(string++) - '0');
+	return (total * sign);
 }

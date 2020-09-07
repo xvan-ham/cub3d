@@ -6,41 +6,13 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 20:10:45 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/01 17:52:01 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/03 19:55:21 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		worldMap2[MAPHEIGHT][MAPWIDTH]=
-{
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},//5
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},//10
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-
-int		worldMap[MAPHEIGHT][MAPWIDTH]=
+int		worldMap3[40][24]/*[MAPHEIGHT][MAPWIDTH]*/=
 {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1},
@@ -68,6 +40,17 @@ int		worldMap[MAPHEIGHT][MAPWIDTH]=
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
+char	worldMap[MAPHEIGHT][MAPWIDTH] =
+{
+	{'1','1','1','1','1','1','1'},
+	{'1','0','0','0','0','0','1'},
+	{'1','0','0','0','0','0','1'},
+	{'1','0','0','0','0','0','1'},
+	{'1','0','0','0','0','0','1'},
+	{'1','0','0','0','0','0','1'},
+	{'1','1','1','1','1','1','1'},
+};
+
 void	ft_fill_pixel_color(char *s, int color) //4 chars (bytes) per pixel (RBG-Alpha) i.e. 32 bits / pixel; color is 4 bytes: 0RGB
 {
 	unsigned char	bytes[4];
@@ -82,7 +65,7 @@ void	ft_fill_pixel_color(char *s, int color) //4 chars (bytes) per pixel (RBG-Al
 	bytes[1] = (u_color >> 16) & 0xFF; //R
 	bytes[2] = (u_color >> 8) & 0xFF; //G
 	bytes[3] = u_color & 0xFF; //B
-/*	s[0] = bytes[3]; //B --Exception occurs here!!!
+	/*s[0] = bytes[3]; //B --Exception occurs here!!!
 	s[1] = bytes[2]; //G
 	s[2] = bytes[1]; //R
 	s[3] = 0; //A*/
@@ -127,7 +110,7 @@ void	ft_img_verLine(t_vectors *v, int x, int	drawStart, int drawEnd, int color) 
 	s += x * 4 + v->img_line_size * drawStart;
 	while (drawStart <= drawEnd)
 	{
-		//ft_fill_pixel_color(s, color); //function that causes Exception / error!!!
+		ft_fill_pixel_color(s, color); //function that causes Exception / error!!!
 		s += v->img_line_size;
 		drawStart++;
 	}
@@ -307,7 +290,7 @@ void	ft_raycasting(t_vectors *v) //EDIT FOR TEXTURES
           v->side = 1;
         }
         //Check if ray has hit a wall
-        if(worldMap[v->map_y][v->map_x] > 0)
+        if(worldMap[v->map_y][v->map_x] > '0')
 			v->hit = 1;
       }
       //Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
@@ -370,9 +353,9 @@ int		ft_move(t_vectors *v)
 	v->flag_stuck = 0;// improve stuck, create another function that checks in all directions
 	if (v->flag_key_w_down)
 	{
-		if(worldMap[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] == 0)
+		if(worldMap[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] == '0')
 			v->pos_y += v->dir_y * v->move_speed;
-		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)] == 0)
+		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)] == '0')
 			v->pos_x += v->dir_x * v->move_speed;
 		if (worldMap[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] ||
 			worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)])
@@ -381,9 +364,9 @@ int		ft_move(t_vectors *v)
 	}
 	if (v->flag_key_s_down)
 	{
-		if(worldMap[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] == 0)
+		if(worldMap[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] == '0')
 			v->pos_y -= v->dir_y * v->move_speed;
-		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)] == 0)
+		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)] == '0')
 			v->pos_x -= v->dir_x * v->move_speed;
 		if (worldMap[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] ||
 			worldMap[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)])
@@ -391,9 +374,9 @@ int		ft_move(t_vectors *v)
 	}
 	if (v->flag_key_a_down)
 	{
-		if(worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] == 0)
+		if(worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] =='0')
 			v->pos_y -= v->plane_y * v->move_speed;
-		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] == 0)
+		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] =='0')
 			v->pos_x -= v->plane_x * v->move_speed;
 		if (worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] ||
 			worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)])
@@ -401,9 +384,9 @@ int		ft_move(t_vectors *v)
 	}
 	if (v->flag_key_d_down)
 	{
-		if(worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] == 0)
+		if(worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] =='0')
 			v->pos_y += v->plane_y * v->move_speed;
-		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] == 0)
+		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] =='0')
 			v->pos_x += v->plane_x * v->move_speed;
 		if (worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] ||
 			worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)])
@@ -535,7 +518,7 @@ void	ft_raycaster_defaults(t_vectors *v)
 	ft_set_orientation(v);
 	v->color_sky = 0x87ceff;
 	v->color_floor = 0x8b6969;
-	v->pos_x = 22; //22
+	v->pos_x = 3; //22
 	v->pos_y = 3; //22
 	v->screen_h = SH;
 	v->screen_w = SW;
@@ -581,11 +564,12 @@ void	ft_mlx_start(t_vectors *v)
 	printf("ft_mlx_start\n");
 	ft_vectors_initialise(v);
 	ft_raycaster_defaults(v);
-	v->mlx = mlx_init();
+	ft_process_cub_file(v);
+	/*v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->screen_w, v->screen_h, WIN_NAME); //create new WINDOW
 	v->img = mlx_new_image(v->mlx, v->screen_w, v->screen_h);
 	v->img_ptr = mlx_get_data_addr(v->img, &(v->img_bpp), &(v->img_line_size), &(v->img_endian));
-	printf("ft_mlx_start_e: init: mlx, win, img\n");
+	printf("ft_mlx_start_e: init: mlx, win, img\n");*/
 }
 
 void	ft_cub3d(void)
@@ -593,7 +577,7 @@ void	ft_cub3d(void)
 	t_vectors v;
 
 	ft_mlx_start(&v);
-	//ft_set_hooks(&v);
+	/*//ft_set_hooks(&v);
 	ft_load_textures(&v);
 	printf("ft_cub3d: loading hooks\n");
 	mlx_hook(v.win, 2, 0, ft_press_key, &v);
@@ -603,15 +587,34 @@ void	ft_cub3d(void)
 	ft_raycasting(&v);
 	printf("ft_cub3d: drawn frame, starting loop hook\n");
 	mlx_loop_hook(v.mlx, ft_move, &v);
-	printf("ft_cub3d:freeing mlx test\n");
+	//printf("ft_cub3d:freeing mlx test\n");
 	//free(v.mlx); 
 	printf("ft_cub3d: done loop hook, next is mlx_loop\n");
 	mlx_loop(v.mlx); //EXC_BAD_ACCESS (address= 0x20)
-	printf("ft_cub3d:post loop\n"); 
+	printf("ft_cub3d:post loop\n"); */
+}
+
+
+void test_gnl(void)
+{
+    char *line;
+	
+	line = 0;
+    int fd = open("eg.txt", O_RDONLY);
+    int n;
+    while ((n = ft_get_next_line(fd, &line)))
+    {
+		if (line)
+		{
+    	    printf("***** OUT<%d>: <%s> *****\n", n, line);
+			free(line);
+		}
+    }
 }
 
 int	main (int argc, char **argv)
 {
 	ft_cub3d();
+	//printf("test: %s\n", ft_strchr("hellobob", 'b'));
 	return (0);
 }

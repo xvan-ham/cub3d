@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/01 17:08:00 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/03 19:51:04 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 # include <stdlib.h>
 # include <math.h>
 # include <unistd.h>
+# include <stddef.h>
+# include <unistd.h>
+# include <fcntl.h>
 
-# define MAPHEIGHT 40
-# define MAPWIDTH 24
+# define MAPHEIGHT 7//40
+# define MAPWIDTH 7//24
+# define BUFFER_SIZE 5
 # define N 0
 # define E 1
 # define W 2
@@ -43,6 +47,12 @@
 # define KEY_RIGHT 124
 # define KEY_ESC 53
 
+typedef struct			s_str_list
+{
+	char				*str;
+	struct s_str_list	*next;
+}						t_str_list;
+
 typedef	struct	s_texture
 {
 	char		*file_name;
@@ -57,7 +67,7 @@ typedef	struct	s_texture
 
 typedef struct	s_vectors
 {
-	int			debug_frame;
+	unsigned int			debug_frame;
 	void		*win;//window indentifier
 	void		*img;
 	char		*img_ptr;
@@ -77,6 +87,8 @@ typedef struct	s_vectors
 	int			flag_key_right_down;
 	int			flag_key_left_down;
 	int			flag_stuck;
+	int			map_width;
+	int			map_height;
 	int			map_y;
 	int			map_x;
 	double		fov;
@@ -109,6 +121,7 @@ typedef struct	s_vectors
 	double		step;
 	double		move_speed;
 	double		rot_speed;
+	int			flag_sprites;
 }				t_vectors;
 
 void			ft_vectors_initialise(t_vectors *v);
@@ -117,5 +130,13 @@ void			ft_putstr(const char *s);
 int				digits(int n);
 void			ft_error(char *s);
 char			*ft_strdup(const char *s);
+int				ft_get_next_line(int fd, char **line);
+char			*ft_strdup(const char *s1);
+char			*ft_strndup(const char *src, size_t chars);
+char			*ft_strjoin(char const *s1, char const *s2);
+void			ft_process_cub_file(t_vectors *v);
+char			*ft_strchr(const char *s, int c);
+t_str_list		*ft_str_list_new_element(const char *s);
+void			ft_str_list_delete(t_str_list *element);
 
 #endif
