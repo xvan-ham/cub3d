@@ -4,7 +4,9 @@ SRCS		=	main.c						\
 				aux.c						\
 				ft_get_next_line_utils.c	\
 				ft_get_next_line.c			\
-				ft_cub_settings.c
+				ft_cub_settings.c			\
+				ft_str_list_functions.c		\
+				ft_cub_settings_map_reading.c
 CC1			=	@gcc -I /usr/local/include
 FL			=	-Wall -Wextra -Werror
 CC2			=	-L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -g

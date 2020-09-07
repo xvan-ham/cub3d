@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:12:28 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/03 18:38:51 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/07 19:44:40 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	ft_vectors_initialise(t_vectors *v)
 {
+	if (!v)
+		ft_error("received null pointer: ft_vectors_initialise");
 	printf("ft_vectors_initialise_s\n");
 	v->debug_frame = 1;
 	v->win = 0;
 	v->img = 0;
 	v->img_ptr = 0;
-	//v->mlx = 0;
+	v->mlx = 0;
+	v->map = 0;
 	v->img_bpp = 0;
 	v->img_line_size = 0;
 	v->img_endian = 0;
@@ -81,6 +84,8 @@ int		ft_strlen(const char *s)
 	int len;
 
 	len = 0;
+	if (!s)
+		ft_error(" received null pointer: ft_strlen");
 	while (s[len])
 		len++;
 	return (len);
@@ -88,6 +93,8 @@ int		ft_strlen(const char *s)
 
 void	ft_putstr(const char *s)
 {
+	if (!s)
+		ft_error(" received null pointer: ft_putstr");
 	write(1, s, ft_strlen(s));
 }
 
@@ -95,6 +102,8 @@ void	ft_putnbr(double n, const char *base)
 {
 	int baselen;
 
+	if (!base)
+		ft_error(" received null pointer: ft_putnbr");
 	baselen = ft_strlen(base);
 	if (n >= baselen)
 	{
@@ -134,7 +143,8 @@ char	*ft_strchr(const char *s, int c)
 void	ft_error(char *s)
 {
 	ft_putstr("\nFatal Error: ");
-	ft_putstr(s);
+	if (s)
+		ft_putstr(s);
 	ft_putstr("\n");
 	exit(1);
 }
@@ -170,6 +180,8 @@ int		ft_atoi(const char *string)
 
 	sign = 1;
 	total = 0;
+	if (!string)
+		ft_error(" received null pointer: ft_atoi");
 	while (*string == 32 || (*string > 8 && *string < 14))
 		string++;
 	if (*string == '-')

@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 20:10:45 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/03 19:55:21 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/07 20:03:18 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,34 @@ void	ft_fill_pixel_color(char *s, int color) //4 chars (bytes) per pixel (RBG-Al
 	unsigned int	u_color;
 	int				i;
 
+	if (!s)
+		ft_error("received null pointer: ft_fill_pixel_color");
 	u_color = (unsigned int)color;
 	i = 0;
 	if (!s)
 		ft_error("ft_fill_pixel_color: null pointer given!");
-	bytes[0] = (u_color >> 24) & 0xFF; //byte not used
+	/*bytes[0] = (u_color >> 24) & 0xFF; //byte not used
 	bytes[1] = (u_color >> 16) & 0xFF; //R
 	bytes[2] = (u_color >> 8) & 0xFF; //G
 	bytes[3] = u_color & 0xFF; //B
 	/*s[0] = bytes[3]; //B --Exception occurs here!!!
 	s[1] = bytes[2]; //G
 	s[2] = bytes[1]; //R
-	s[3] = 0; //A*/
+	s[3] = 0; //A
 	*(s) = bytes[3]; //B --Exception occurs here!!!
 	s[1] = bytes[2]; //G
 	s[2] = bytes[1]; //R
-	s[3] = 0; //A
+	s[3] = 0; //A*/
 }
 
 void	ft_color_pixel(char *s, char *s_tex) //has potential for: segmentation fault on Null pointer
 {
 	int	i;
 
+	if (!s)
+		ft_error("received null pointer: ft_color_pixel (img ptr)");
+	if (!s_tex)
+		ft_error("received null pointer: ft_color_pixel (tex pixel ptr)");
 	i = 0;
 	while (i < 3){
 		s[i] = s_tex[i];
@@ -106,6 +112,8 @@ void	ft_img_verLine(t_vectors *v, int x, int	drawStart, int drawEnd, int color) 
 		printf("drawStart out of bounds\n");
 	if (drawEnd > v->screen_h || drawEnd < v->screen_h)
 		printf("drawEnd out of bounds\n");*/
+	if (!v)
+		ft_error("received null pointer: ft_img_verLine");
 	s = v->img_ptr;
 	s += x * 4 + v->img_line_size * drawStart;
 	while (drawStart <= drawEnd)
@@ -125,11 +133,12 @@ void	ft_img_verLineTest(t_vectors *v, int x, int	drawStart, int drawEnd) //draws
 	int i;
 	int	desired_pixel;
 
+	if (!v)
+		ft_error("received null pointer: ft_img_verLineTest");
 	desired_pixel = 98;
 	i = 0;
 	t = v->textures[0];
 	s_tex = t->img_ptr + (desired_pixel * 4);
-
 	s = v->img_ptr;
 	s += x * 4 + v->img_line_size * drawStart;
 	while (drawStart <= drawEnd)
@@ -152,6 +161,8 @@ void	ft_draw_vert(t_vectors *v, int x, int drawStart, int drawEnd, int tex_n) //
 	char		*s_tex;
 	t_texture	*t;
 
+	if (!v)
+		ft_error("received null pointer: ft_draw_vert");
 	t = v->textures[tex_n];
 	s_tex = t->img_ptr + (4 * v->tex_y);
 	s = v->img_ptr + (x * 4) + (v->img_line_size * drawStart);
@@ -173,6 +184,8 @@ void	ft_draw_floor(t_vectors *v, int x, int drawEnd)
 	int	horiz;
 	int	bottom;
 
+	if (!v)
+		ft_error("received null pointer: ft_draw_floor");
 	bottom = v->screen_h;
 	horiz = bottom / 2;
 	if (drawEnd > horiz)
@@ -184,6 +197,8 @@ void	ft_draw_sky(t_vectors *v, int x, int drawStart)
 {
 	int	horiz;
 
+	if (!v)
+		ft_error("received null pointer: ft_draw_sky");
 	horiz = v->screen_h / 2;
 	if (horiz > drawStart)
 		horiz = drawStart;
@@ -198,11 +213,15 @@ void	ft_set_move_speed(t_vectors *v)	//TBI: record data at different pixel count
 {
 	unsigned long int	i;
 
+	if (!v)
+		ft_error("received null pointer: ft_set_move_speed");
 	i = v->screen_w * v->screen_h;
 }
 
 int		ft_choose_wall_texture(t_vectors *v)
 {
+	if (!v)
+		ft_error("received null pointer: ft_choose_wall_texture");
 	if (v->side == 0)
 	{
 		if (v->raydir_y > 0)
@@ -218,7 +237,7 @@ int		ft_choose_wall_texture(t_vectors *v)
 	return (3);
 }
 
-void	ft_raycasting(t_vectors *v) //EDIT FOR TEXTURES
+void	ft_raycasting(t_vectors *v)
 {
 	int		h;
 	int		x;
@@ -228,6 +247,8 @@ void	ft_raycasting(t_vectors *v) //EDIT FOR TEXTURES
 	int		color; //used for untextured surfaces (i.e. floor and sky)
 	int		texNum;
 
+	if (!v)
+		ft_error("received null pointer: ft_raycasting");
 	printf("ft_raycasting_s: frame: %d\n", v->debug_frame++);
 	x = 0;
 	h = v->screen_h;
@@ -343,13 +364,23 @@ void	ft_raycasting(t_vectors *v) //EDIT FOR TEXTURES
 		x++;
 	}
 	//printf("tex ptr: img: %p\n", (v->textures[0])->img);	
-		mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
+	if (!v)
+		ft_error("v is null pointer in: ft_raycasting");
+	if (!(v->mlx))
+		ft_error("mlx is null pointer in: ft_raycasting");
+	if (!(v->win))
+		ft_error("mlx is null pointer in: ft_raycasting");
+	if (!(v->img))
+		ft_error("mlx is null pointer in: ft_raycasting");
+	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
 
 }
 
 int		ft_move(t_vectors *v)
 {
 	ft_putstr(">");
+	if (!v)
+		ft_error("received null pointer: ft_move");
 	v->flag_stuck = 0;// improve stuck, create another function that checks in all directions
 	if (v->flag_key_w_down)
 	{
@@ -422,6 +453,8 @@ int		ft_press_key(int key, void *param)
 {
 	t_vectors	*v;
 
+	if (!v)
+		ft_error("received null pointer: ft_press_key");
 	v = (t_vectors *)(param);
 	if (key == KEY_ESC)
 	{
@@ -449,6 +482,8 @@ int		ft_release_key(int key, void *param)
 {
 	t_vectors	*v;
 
+	if (!v)
+		ft_error("received null pointer: ft_release_key");
 	v = (t_vectors *)(param);
 	if (key == KEY_W)
 		v->flag_key_w_down = 0;
@@ -481,6 +516,8 @@ void	ft_set_hooks(t_vectors *v)
 
 void	ft_set_orientation(t_vectors *v)
 {
+	if (!v)
+		ft_error("received null pointer: ft_set_orientation");
 	if (v->orientation == N)
 	{
 		v->dir_x = 0;
@@ -515,6 +552,8 @@ void	ft_raycaster_defaults(t_vectors *v)
 {
 	t_texture **textures;
 
+	if (!v)
+		ft_error("received null pointer: ft_raycaster_defaults");
 	ft_set_orientation(v);
 	v->color_sky = 0x87ceff;
 	v->color_floor = 0x8b6969;
@@ -529,6 +568,8 @@ void	ft_raycaster_defaults(t_vectors *v)
 
 void	ft_load_tex_files(t_vectors *v)
 {
+	if (!v)
+		ft_error("received null pointer: ft_load_tex_files");
 	v->tex_files[0] = ft_strdup("../Textures/brick_4.xpm");
 	v->tex_files[1] = ft_strdup("../Textures/brick_1.xpm");//bit ugly
 	v->tex_files[2] = ft_strdup("../Textures/brick_2.xpm");
@@ -541,6 +582,8 @@ void	ft_load_textures(t_vectors *v)
 	int			i;
 	
 	i = 0;
+	if (!v)
+		ft_error("received null pointer: ft_load_textures");
 	ft_load_tex_files(v);
 	while (i < 4)
 	{
@@ -561,15 +604,17 @@ void	ft_load_textures(t_vectors *v)
 
 void	ft_mlx_start(t_vectors *v)
 {
+	if (!v)
+		ft_error("received null pointer: ft_mlx_start");
 	printf("ft_mlx_start\n");
 	ft_vectors_initialise(v);
 	ft_raycaster_defaults(v);
-	ft_process_cub_file(v);
-	/*v->mlx = mlx_init();
+	//ft_process_cub_file(v);
+	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->screen_w, v->screen_h, WIN_NAME); //create new WINDOW
 	v->img = mlx_new_image(v->mlx, v->screen_w, v->screen_h);
 	v->img_ptr = mlx_get_data_addr(v->img, &(v->img_bpp), &(v->img_line_size), &(v->img_endian));
-	printf("ft_mlx_start_e: init: mlx, win, img\n");*/
+	printf("ft_mlx_start_e: init: mlx, win, img\n");
 }
 
 void	ft_cub3d(void)
@@ -577,7 +622,7 @@ void	ft_cub3d(void)
 	t_vectors v;
 
 	ft_mlx_start(&v);
-	/*//ft_set_hooks(&v);
+	//ft_set_hooks(&v);
 	ft_load_textures(&v);
 	printf("ft_cub3d: loading hooks\n");
 	mlx_hook(v.win, 2, 0, ft_press_key, &v);
@@ -591,7 +636,7 @@ void	ft_cub3d(void)
 	//free(v.mlx); 
 	printf("ft_cub3d: done loop hook, next is mlx_loop\n");
 	mlx_loop(v.mlx); //EXC_BAD_ACCESS (address= 0x20)
-	printf("ft_cub3d:post loop\n"); */
+	printf("ft_cub3d:post loop\n"); 
 }
 
 
@@ -612,7 +657,7 @@ void test_gnl(void)
     }
 }
 
-int	main (int argc, char **argv)
+int	main (void)//int argc, char **argv)
 {
 	ft_cub3d();
 	//printf("test: %s\n", ft_strchr("hellobob", 'b'));

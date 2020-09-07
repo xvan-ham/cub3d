@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/03 19:51:04 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/07 18:15:07 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct	s_vectors
 	void		*mlx;//connection identifier
 	t_texture	**textures;
 	char		**tex_files;
+	char		**map;
 	int			img_bpp;
 	int			img_line_size;
 	int			img_endian;
@@ -138,5 +139,7 @@ void			ft_process_cub_file(t_vectors *v);
 char			*ft_strchr(const char *s, int c);
 t_str_list		*ft_str_list_new_element(const char *s);
 void			ft_str_list_delete(t_str_list *element);
+void			ft_parse_line(t_vectors *v, const char *c, t_str_list **tmp_map, int *flag_map);
+void			ft_print_tmp_map(t_str_list *tmp_map);
 
 #endif
