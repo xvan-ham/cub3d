@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 20:10:45 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/07 20:03:18 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/08 19:45:54 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -609,7 +609,7 @@ void	ft_mlx_start(t_vectors *v)
 	printf("ft_mlx_start\n");
 	ft_vectors_initialise(v);
 	ft_raycaster_defaults(v);
-	//ft_process_cub_file(v);
+	ft_process_cub_file(v);
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->screen_w, v->screen_h, WIN_NAME); //create new WINDOW
 	v->img = mlx_new_image(v->mlx, v->screen_w, v->screen_h);
@@ -632,6 +632,8 @@ void	ft_cub3d(void)
 	ft_raycasting(&v);
 	printf("ft_cub3d: drawn frame, starting loop hook\n");
 	mlx_loop_hook(v.mlx, ft_move, &v);
+	printf("Planned exit for testing purposes\n");
+	exit(0);
 	//printf("ft_cub3d:freeing mlx test\n");
 	//free(v.mlx); 
 	printf("ft_cub3d: done loop hook, next is mlx_loop\n");
@@ -660,6 +662,6 @@ void test_gnl(void)
 int	main (void)//int argc, char **argv)
 {
 	ft_cub3d();
-	//printf("test: %s\n", ft_strchr("hellobob", 'b'));
+	//printf("test: <%s>\n", );
 	return (0);
 }

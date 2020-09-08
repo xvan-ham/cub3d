@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:35:23 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/07 20:39:09 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/08 17:04:44 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,29 @@ static int	ft_check_map_height(t_vectors *v, t_str_list *tmp_map)
 static int	ft_check_map_width(t_vectors *v, t_str_list *tmp_map)
 {
 	int	max; //interrupted day here, continue here!!
+	int n;
 
 	if (!v)
 		ft_error("received null pointer: ft_check_map_width");
-	max = 0;
-	//max = ft_strlen();
+	n = 0;
+	max = ft_strlen(tmp_map->str);
 	while (tmp_map->next)
 	{
-
 		tmp_map = tmp_map->next;
-		max++;
+		n = ft_strlen(tmp_map->str);
+		if (n > max)
+			max = n;
 	}
-	return(max + 1);
+	return(max);
 }
 
-void	ft_check_map(t_vectors *v, t_str_list *tmp_map)
+void	ft_check_map(t_vectors *v, t_str_list *tmp_map) //TBI: Add map validation
 {
 	int	len;
 
 	if (!v)
 		ft_error("received null pointer: ft_check_map");
-	len = 0;
-	while (tmp_map->next)
-	{
-		tmp_map = tmp_map->next;
-		len++;
-	}
-	v->map_height = len + 1;
+	v->map_height = ft_check_map_height(v, tmp_map);
+	v->map_width = ft_check_map_width(v, tmp_map);
+	printf("Height: %d, Width: %d\n", v->map_height, v->map_width);
 }

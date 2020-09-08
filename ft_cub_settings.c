@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:34:49 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/07 18:26:02 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/08 20:04:23 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ void	ft_process_cub_file(t_vectors *v)
 		if (line)
 		{
 			ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
-			free(line);
 		}
     }
 	if (n < 0)
 		ft_error("ft_get_next_line returned an error in ft_process_cub_file");
 	ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
-	free(line);
 	ft_print_tmp_map(tmp_map); //enable to print tmp_map
-	
+	ft_check_map(v, tmp_map);
+	ft_create_map(v, tmp_map);
 }

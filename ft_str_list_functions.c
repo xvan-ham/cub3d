@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 16:56:10 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/07 17:00:24 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/08 20:07:10 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,18 @@ void		ft_str_list_delete(t_str_list *element)
 		free(element);
 		element = next;
 	}
+}
+
+t_str_list	*ft_str_list_get_element(t_str_list *element, int i)
+{
+	if (i < 0 || !element)
+		return (0);
+	while (element->next && i)
+	{
+		element = element->next;
+		i--;
+	}
+	if (i)
+		return (0);
+	return (element);
 }

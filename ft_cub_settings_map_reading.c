@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/07 18:01:09 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/08 20:04:42 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,19 @@ static char	*ft_getmapstr(const char *c)
 	const char	*aux;
 	char		*str;
 
-	aux = c--;
+	aux = c;
 	len = 0;
-	while (*(++c) && ft_strchr(" 012NSWE", *c))
+	while (ft_chars_in_str("012NSWE", c))
 	{
-		if (ft_strchr("012NSWE", *c))
-			len++;
+		len++;
+		c++;
 	}
-	if (*c)
-		ft_error("Invalid map");
 	c = aux;
 	if (!(str = (char *)malloc((1 + len) * sizeof(char))))
 		ft_error("Malloc for a str in ft_read_map failed");
 	aux = str;
 	while (*c && ft_strchr(" 012NSEW", *c))
 	{
-		while (*c == ' ')
-			c++;
 		*(str++) = *(c++);
 	}
 	*str = 0;
@@ -62,26 +58,28 @@ static void	ft_add_to_tmp_map(t_vectors *v, const char *c, t_str_list **tmp_map)
 	aux_e->next = element;
 }
 
+
 void		ft_parse_line(t_vectors *v, const char *c, t_str_list **tmp_map,
 	int *flag_map)
 {
-	const char	*c_ptr;
+	char		*debug;
 
-	c_ptr = c;
-	while (*c_ptr && (*c_ptr == ' '))
-		c_ptr++;
-	if (*c_ptr == 0 && *flag_map)
-		ft_error("Invalid map, don't add spaces nor newlines to map!!");
-	if (*c_ptr == 0)
-		return ;
-	if (*c_ptr == '1')
+	//ft_check_config(v, c);
+	if ((debug = ft_chars_in_str("012NSWE", c)))
 	{
 		*flag_map = 1;
-		ft_add_to_tmp_map(v, c_ptr, tmp_map);
+		ft_add_to_tmp_map(v, c, tmp_map);
+		free((void *)c);
 		return ;
 	}
-	free((void *)c);
-	ft_error("Invalid map");
+	else {
+		printf("%s\n", debug);
+	}
+	if (*flag_map)
+	{
+		ft_error("Invalid map, don't add empty lines to map!!");
+		free((void *)c);
+	}
 }
 
 void		ft_print_tmp_map(t_str_list *tmp_map)

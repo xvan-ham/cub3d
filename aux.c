@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:12:28 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/07 19:44:40 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/08 19:30:29 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,22 +173,33 @@ char	*ft_strndup(const char *src, size_t chars)
 	return (str);
 }
 
-int		ft_atoi(const char *string)
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	int	sign;
-	int	total;
+	int		i;
 
-	sign = 1;
-	total = 0;
-	if (!string)
-		ft_error(" received null pointer: ft_atoi");
-	while (*string == 32 || (*string > 8 && *string < 14))
-		string++;
-	if (*string == '-')
-		sign *= -1;
-	if (*string == '-' || *string == '+')
-		string++;
-	while (*string && *string >= 48 && *string <= 57)
-		total = total * 10 + (*(string++) - '0');
-	return (total * sign);
+	while (*s1 && (s1 = ft_strchr(s1, *s2)))
+	{
+		i = 0;
+		while (*(s2 + i))
+		{
+			if (*(s1 + i) != *(s2 + i))
+				break ;
+			i++;
+		}
+		if (*(s2 + i) == 0)
+			return ((char *)s1);
+		s1++;
+	}
+	return (0);
+}
+
+char	*ft_chars_in_str(const char *chars, const char *str)
+{
+	if (*str == 0)
+		return (0);
+	while (*str && !(ft_strchr(chars, *str)))
+		str++;
+	if (*str == 0)
+		return (0);
+	return (ft_strchr(chars, *str));
 }

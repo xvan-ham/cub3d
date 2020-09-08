@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/07 18:15:07 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/08 19:58:39 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,13 @@ void			ft_process_cub_file(t_vectors *v);
 char			*ft_strchr(const char *s, int c);
 t_str_list		*ft_str_list_new_element(const char *s);
 void			ft_str_list_delete(t_str_list *element);
+t_str_list		*ft_str_list_get_element(t_str_list *element, int i);
 void			ft_parse_line(t_vectors *v, const char *c, t_str_list **tmp_map, int *flag_map);
 void			ft_print_tmp_map(t_str_list *tmp_map);
+void			ft_check_map(t_vectors *v, t_str_list *tmp_map);
+void			ft_create_map(t_vectors *v, t_str_list *tmp_map);
+void			ft_check_config(t_vectors *v, const char *c);
+char			*ft_chars_in_str(const char *chars, const char *str);
+char			*ft_strstr(const char *s1, const char *s2);
 
 #endif
