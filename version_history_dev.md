@@ -1,13 +1,16 @@
-#Changelog - Dev Branch
+# Changelog - Dev Branch
 
-##v0.34
+## v0.345	
+			Made format changes to version history files (md files).
+
+## v0.34
 			Made format changes to version history files (md files).
 			Made changes for raycaster to use new map and sky & floor to be drawn
 			using R, G, B int values rather than "color".
 			NOT currently working, still in the middle of changing / testing.
 
 
-##v0.33		
+## v0.33		
 			Changed map reading and processing to account for valid spaces.
 			Added functions to determine width and height (in units) of world map.
 			Added function to create a matrix in given dimensions.
@@ -21,7 +24,7 @@
 					Make raycaster use the newly created map.
 					ft_cub_settings_set_settings.c line parsing for settings	
 
-##v0.32		
+## v0.32		
 			Separated map-reading related code to its own source-code
 			(ft_cub_settings_map_reading).
 			Map-reading is now also able to parse orientation letters (N, S, E, W), appart from
@@ -35,10 +38,10 @@
 			Added null-pointer checks in every function that takes a pointer as an argument
 			in an attempt to locate the occasional segfault - no success.
 
-##v0.31		
+## v0.31		
 			Incorporated .gitignore file to track changes more easily
 
-##v0.3		
+## v0.3		
 			Added map reading capability and necessary utilities such as
 			ft_get_next_line, struct s_str_list to hold tmp_map in a list.
 			Added ft_print_tmp_map(t_str_list *tmp_map) to print tmp_map (struct s_str_list)
