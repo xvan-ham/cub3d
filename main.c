@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 20:10:45 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/08 19:45:54 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/09 20:27:21 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	worldMap[MAPHEIGHT][MAPWIDTH] =
 	{'1','1','1','1','1','1','1'},
 };
 
-void	ft_fill_pixel_color(char *s, int color) //4 chars (bytes) per pixel (RBG-Alpha) i.e. 32 bits / pixel; color is 4 bytes: 0RGB
+/*void	ft_fill_pixel_color(char *s, int color) //4 chars (bytes) per pixel (RBG-Alpha) i.e. 32 bits / pixel; color is 4 bytes: 0RGB
 {
 	unsigned char	bytes[4];
 	unsigned int	u_color;
@@ -63,19 +63,20 @@ void	ft_fill_pixel_color(char *s, int color) //4 chars (bytes) per pixel (RBG-Al
 	i = 0;
 	if (!s)
 		ft_error("ft_fill_pixel_color: null pointer given!");
-	/*bytes[0] = (u_color >> 24) & 0xFF; //byte not used
+	bytes[0] = (u_color >> 24) & 0xFF; //byte not used
 	bytes[1] = (u_color >> 16) & 0xFF; //R
 	bytes[2] = (u_color >> 8) & 0xFF; //G
 	bytes[3] = u_color & 0xFF; //B
-	/*s[0] = bytes[3]; //B --Exception occurs here!!!
+	
+	s[0] = bytes[3]; //B --Exception occurs here!!!
 	s[1] = bytes[2]; //G
 	s[2] = bytes[1]; //R
 	s[3] = 0; //A
 	*(s) = bytes[3]; //B --Exception occurs here!!!
 	s[1] = bytes[2]; //G
 	s[2] = bytes[1]; //R
-	s[3] = 0; //A*/
-}
+	s[3] = 0; //A
+}*/
 
 void	ft_color_pixel(char *s, char *s_tex) //has potential for: segmentation fault on Null pointer
 {
@@ -93,7 +94,7 @@ void	ft_color_pixel(char *s, char *s_tex) //has potential for: segmentation faul
 	s[i] = 0; //is this needed? Test
 }
 
-void	ft_img_reset(t_vectors *v) //replace with draw sky and floor
+/*void	ft_img_reset(t_vectors *v) //replace with draw sky and floor
 {
 	unsigned long int	i;
 	i = 4 * v->screen_h * v->screen_w - 1;
@@ -101,17 +102,17 @@ void	ft_img_reset(t_vectors *v) //replace with draw sky and floor
 	{
 		v->img_ptr[i--] = 0;
 	}
-}
+}*/
 
-void	ft_img_verLine(t_vectors *v, int x, int	drawStart, int drawEnd, int color) //draws vertical line for UNtextured raycasting
+/*void	ft_img_verLine(t_vectors *v, int x, int	drawStart, int drawEnd) //draws vertical line for UNtextured raycasting
 {
 	char	*s;
-	/*if (x > v->screen_w || x < v->screen_w)
+	if (x > v->screen_w || x < v->screen_w)
 		printf("x out of bounds\n");
 	if (drawStart > v->screen_h || drawStart < v->screen_h)
 		printf("drawStart out of bounds\n");
 	if (drawEnd > v->screen_h || drawEnd < v->screen_h)
-		printf("drawEnd out of bounds\n");*/
+		printf("drawEnd out of bounds\n");
 	if (!v)
 		ft_error("received null pointer: ft_img_verLine");
 	s = v->img_ptr;
@@ -122,9 +123,9 @@ void	ft_img_verLine(t_vectors *v, int x, int	drawStart, int drawEnd, int color) 
 		s += v->img_line_size;
 		drawStart++;
 	}
-}
+}*/
 
-void	ft_img_verLineTest(t_vectors *v, int x, int	drawStart, int drawEnd) //draws vertical line for UNtextured raycasting
+/*void	ft_img_verLineTest(t_vectors *v, int x, int	drawStart, int drawEnd) //draws vertical line for UNtextured raycasting
 {
 	int		aux;
 	char	*s;
@@ -152,7 +153,7 @@ void	ft_img_verLineTest(t_vectors *v, int x, int	drawStart, int drawEnd) //draws
 		s += v->img_line_size;
 		drawStart++;
 	}
-}
+}*/
 
 void	ft_draw_vert(t_vectors *v, int x, int drawStart, int drawEnd, int tex_n) //TBI: draw sky and floor on same vertical
 {
@@ -173,16 +174,32 @@ void	ft_draw_vert(t_vectors *v, int x, int drawStart, int drawEnd, int tex_n) //
 		if (v->tex_x >= t->tex_h - 1)
 			 v->tex_x = t->tex_h - 1;
 		ft_color_pixel(s, &s_tex[v->tex_x * t->img_line_size]);
+		//ft_memcpy(s, &s_tex[v->tex_x * t->img_line_size], 4);
 		s += v->img_line_size;
 		v->tex_pos += v->step;
 		drawStart++;
 	}
 }
 
+/*void	ft_img_verLine(t_vectors *v, int x, int	drawStart, int drawEnd) //draws vertical line for UNtextured raycasting
+{
+	char	*s;
+
+	s = v->img_ptr;
+	s += x * 4 + v->img_line_size * drawStart;
+	while (drawStart <= drawEnd)
+	{
+		ft_fill_pixel_color(s, color); //function that causes Exception / error!!!
+		s += v->img_line_size;
+		drawStart++;
+	}
+}*/
+
 void	ft_draw_floor(t_vectors *v, int x, int drawEnd)
 {
-	int	horiz;
-	int	bottom;
+	int				horiz;
+	int				bottom;
+	char	*s;
 
 	if (!v)
 		ft_error("received null pointer: ft_draw_floor");
@@ -190,19 +207,48 @@ void	ft_draw_floor(t_vectors *v, int x, int drawEnd)
 	horiz = bottom / 2;
 	if (drawEnd > horiz)
 		horiz = drawEnd;
-	ft_img_verLine(v, x, horiz, bottom, v->color_floor);
+	s = v->img_ptr;
+	s += x * 4 + v->img_line_size * horiz;
+	while (horiz <= bottom)
+	{
+		ft_memcpy(s,&v->floor->r, 1);
+		ft_memcpy(s + 1,&v->floor->g, 1);
+		ft_memcpy(s + 2,&v->floor->b, 1);
+		ft_memcpy(s + 3, "0", 1);
+		s += v->img_line_size;
+		horiz++;
+	}
 }
 
 void	ft_draw_sky(t_vectors *v, int x, int drawStart)
 {
-	int	horiz;
+	int				horiz;
+	int				i;
+	char	*s;
 
+	i = 0;
 	if (!v)
 		ft_error("received null pointer: ft_draw_sky");
+	if (!v->img_ptr)
+		ft_error("received null pointer: ft_draw_sky (img_ptr)");
 	horiz = v->screen_h / 2;
 	if (horiz > drawStart)
 		horiz = drawStart;
-	ft_img_verLine(v, x, 0, horiz, v->color_sky);
+	s = v->img_ptr;
+	s += x * 4 + v->img_line_size * horiz;
+	while (i <= horiz)
+	{
+		s[0] = v->sky->r;
+		s[1] = v->sky->g;
+		s[2] = v->sky->b;
+		s[3] = 0;
+		/*ft_memcpy(s, &v->sky->r, 1);
+		ft_memcpy(s + 1, &v->sky->g, 1);
+		ft_memcpy(s + 2, &v->sky->b, 1);
+		ft_memcpy(s + 3, 0, 1);
+		s += v->img_line_size;*/
+		i++;
+	}
 }
 
 void	ft_set_fov(t_vectors *v) //TBI: modify FOV according to window aspect ratio
@@ -311,7 +357,7 @@ void	ft_raycasting(t_vectors *v)
           v->side = 1;
         }
         //Check if ray has hit a wall
-        if(worldMap[v->map_y][v->map_x] > '0')
+        if(v->map[v->map_y][v->map_x] > '0' && v->map[v->map_y][v->map_x] <= '2')
 			v->hit = 1;
       }
       //Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
@@ -359,7 +405,7 @@ void	ft_raycasting(t_vectors *v)
 	  //printf("tex_pos: <%f>; lineHeight: <%d>\n", v->tex_pos, lineHeight);
 	  //printf("..................................................................\n");
 	  ft_draw_sky(v, x, drawStart);//FIX: This line causes a segfault!!! fixed?
-	  ft_draw_floor(v, x, drawEnd);//FIX: This line causes a segfault!!! fixed?
+	  //ft_draw_floor(v, x, drawEnd);//FIX: This line causes a segfault!!! fixed?
 	  ft_draw_vert(v, x, drawStart, drawEnd, texNum);//FIX: This line causes a segfault!!! fixed?
 		x++;
 	}
@@ -373,7 +419,6 @@ void	ft_raycasting(t_vectors *v)
 	if (!(v->img))
 		ft_error("mlx is null pointer in: ft_raycasting");
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
-
 }
 
 int		ft_move(t_vectors *v)
@@ -384,43 +429,43 @@ int		ft_move(t_vectors *v)
 	v->flag_stuck = 0;// improve stuck, create another function that checks in all directions
 	if (v->flag_key_w_down)
 	{
-		if(worldMap[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] == '0')
+		if(v->map[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] == '0')
 			v->pos_y += v->dir_y * v->move_speed;
-		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)] == '0')
+		if(v->map[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)] == '0')
 			v->pos_x += v->dir_x * v->move_speed;
-		if (worldMap[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] ||
-			worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)])
+		if (v->map[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] ||
+			v->map[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)])
 			v->flag_stuck = 1;
 
 	}
 	if (v->flag_key_s_down)
 	{
-		if(worldMap[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] == '0')
+		if(v->map[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] == '0')
 			v->pos_y -= v->dir_y * v->move_speed;
-		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)] == '0')
+		if(v->map[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)] == '0')
 			v->pos_x -= v->dir_x * v->move_speed;
-		if (worldMap[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] ||
-			worldMap[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)])
+		if (v->map[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] ||
+			v->map[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)])
 			v->flag_stuck = 1;
 	}
 	if (v->flag_key_a_down)
 	{
-		if(worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] =='0')
+		if(v->map[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] =='0')
 			v->pos_y -= v->plane_y * v->move_speed;
-		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] =='0')
+		if(v->map[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] =='0')
 			v->pos_x -= v->plane_x * v->move_speed;
-		if (worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] ||
-			worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)])
+		if (v->map[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] ||
+			v->map[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)])
 			v->flag_stuck = 1;
 	}
 	if (v->flag_key_d_down)
 	{
-		if(worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] =='0')
+		if(v->map[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] =='0')
 			v->pos_y += v->plane_y * v->move_speed;
-		if(worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] =='0')
+		if(v->map[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] =='0')
 			v->pos_x += v->plane_x * v->move_speed;
-		if (worldMap[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] ||
-			worldMap[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)])
+		if (v->map[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] ||
+			v->map[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)])
 			v->flag_stuck = 1;
 	}
 	if (v->flag_key_right_down)
@@ -555,8 +600,12 @@ void	ft_raycaster_defaults(t_vectors *v)
 	if (!v)
 		ft_error("received null pointer: ft_raycaster_defaults");
 	ft_set_orientation(v);
-	v->color_sky = 0x87ceff;
-	v->color_floor = 0x8b6969;
+	v->sky->r = (char)255;
+	v->sky->g = 150;
+	v->sky->b = 150;
+	v->floor->r = 180;
+	v->floor->g = 100;
+	v->floor->b = 100;
 	v->pos_x = 3; //22
 	v->pos_y = 3; //22
 	v->screen_h = SH;
@@ -632,13 +681,10 @@ void	ft_cub3d(void)
 	ft_raycasting(&v);
 	printf("ft_cub3d: drawn frame, starting loop hook\n");
 	mlx_loop_hook(v.mlx, ft_move, &v);
-	printf("Planned exit for testing purposes\n");
-	exit(0);
-	//printf("ft_cub3d:freeing mlx test\n");
-	//free(v.mlx); 
+	//printf("Planned exit for testing purposes\n");
+	//exit(0);
 	printf("ft_cub3d: done loop hook, next is mlx_loop\n");
 	mlx_loop(v.mlx); //EXC_BAD_ACCESS (address= 0x20)
-	printf("ft_cub3d:post loop\n"); 
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/08 19:58:39 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/09 19:38:36 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ typedef	struct	s_texture
 	int			img_endian;
 }				t_texture;
 
+typedef struct		s_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}					t_color;
+
 typedef struct	s_vectors
 {
 	unsigned int			debug_frame;
@@ -73,13 +80,13 @@ typedef struct	s_vectors
 	char		*img_ptr;
 	void		*mlx;//connection identifier
 	t_texture	**textures;
+	t_color		*sky;
+	t_color		*floor;
 	char		**tex_files;
 	char		**map;
 	int			img_bpp;
 	int			img_line_size;
 	int			img_endian;
-	int			color_floor;
-	int			color_sky;
 	int			n_textures;
 	int			flag_key_w_down;
 	int			flag_key_a_down;
@@ -147,5 +154,6 @@ void			ft_create_map(t_vectors *v, t_str_list *tmp_map);
 void			ft_check_config(t_vectors *v, const char *c);
 char			*ft_chars_in_str(const char *chars, const char *str);
 char			*ft_strstr(const char *s1, const char *s2);
+void			*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif

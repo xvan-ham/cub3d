@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:12:28 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/08 19:30:29 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/09 19:47:06 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ void	ft_vectors_initialise(t_vectors *v)
 	v->wall_x = 0;//used?
 	v->n_textures = N_TEXTURES;
 	v->flag_sprites = 0;//used?
+	if (!(v->sky = (t_color *)malloc(sizeof(t_color))))
+		ft_error("Not enough memory for sky color (malloc)");
+	if (!(v->floor = (t_color *)malloc(sizeof(t_color))))
+		ft_error("Not enough memory for floor color (malloc)");
 	if (!(v->textures = (t_texture **)malloc(sizeof(t_texture *))))
 		ft_error("Not enough memory for texture array (malloc)");
 	if (!(v->tex_files = (char **)malloc(sizeof(char *) * 4)))
@@ -202,4 +206,18 @@ char	*ft_chars_in_str(const char *chars, const char *str)
 	if (*str == 0)
 		return (0);
 	return (ft_strchr(chars, *str));
+}
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	unsigned int	i;
+	char			*cdst;
+
+	cdst = (char *)dst;
+	i = 0;
+	if (!dst && !src)
+		return (0);
+	while (n && i++ < n)
+		*(cdst++) = *(char *)(src++);
+	return (dst);
 }
