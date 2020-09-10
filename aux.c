@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:12:28 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/09 19:47:06 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:44:59 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_vectors_initialise(t_vectors *v)
 	v->flag_key_left_down = 0;
 	v->flag_key_right_down = 0;
 	v->flag_stuck = 0;
-	v->orientation = W;
+	v->orientation = N;
 	v->fov = 0.66;//0.66
 	v->map_height = 0;
 	v->map_width = 0;
@@ -76,7 +76,7 @@ void	ft_vectors_initialise(t_vectors *v)
 		ft_error("Not enough memory for sky color (malloc)");
 	if (!(v->floor = (t_color *)malloc(sizeof(t_color))))
 		ft_error("Not enough memory for floor color (malloc)");
-	if (!(v->textures = (t_texture **)malloc(sizeof(t_texture *))))
+	if (!(v->textures = (t_texture **)malloc(4 * sizeof(t_texture *))))
 		ft_error("Not enough memory for texture array (malloc)");
 	if (!(v->tex_files = (char **)malloc(sizeof(char *) * 4)))
 		ft_error("Not enough memory for tex_files (strings) array (malloc)");

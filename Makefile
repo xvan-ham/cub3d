@@ -9,6 +9,7 @@ SRCS		=	main.c							\
 				ft_cub_settings_map_reading.c	\
 				ft_cub_settings_map_check.c		\
 				ft_cub_settings_set_settings.c	\
+				ft_cub_settings_player_pos.c	\
 				ft_cub_settings_map_create.c
 CC1			=	@gcc -I /usr/local/include
 FL			=	-Wall -Wextra -Werror

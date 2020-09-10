@@ -6,79 +6,13 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 20:10:45 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/09 20:27:21 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/10 20:27:27 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		worldMap3[40][24]/*[MAPHEIGHT][MAPWIDTH]*/=
-{
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},//5
-  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1},
-  {1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,1,1,0,1,1,0,1,1,1,1,0,1,0,1,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,1,1,1,1},//10
-  {1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-
-char	worldMap[MAPHEIGHT][MAPWIDTH] =
-{
-	{'1','1','1','1','1','1','1'},
-	{'1','0','0','0','0','0','1'},
-	{'1','0','0','0','0','0','1'},
-	{'1','0','0','0','0','0','1'},
-	{'1','0','0','0','0','0','1'},
-	{'1','0','0','0','0','0','1'},
-	{'1','1','1','1','1','1','1'},
-};
-
-/*void	ft_fill_pixel_color(char *s, int color) //4 chars (bytes) per pixel (RBG-Alpha) i.e. 32 bits / pixel; color is 4 bytes: 0RGB
-{
-	unsigned char	bytes[4];
-	unsigned int	u_color;
-	int				i;
-
-	if (!s)
-		ft_error("received null pointer: ft_fill_pixel_color");
-	u_color = (unsigned int)color;
-	i = 0;
-	if (!s)
-		ft_error("ft_fill_pixel_color: null pointer given!");
-	bytes[0] = (u_color >> 24) & 0xFF; //byte not used
-	bytes[1] = (u_color >> 16) & 0xFF; //R
-	bytes[2] = (u_color >> 8) & 0xFF; //G
-	bytes[3] = u_color & 0xFF; //B
-	
-	s[0] = bytes[3]; //B --Exception occurs here!!!
-	s[1] = bytes[2]; //G
-	s[2] = bytes[1]; //R
-	s[3] = 0; //A
-	*(s) = bytes[3]; //B --Exception occurs here!!!
-	s[1] = bytes[2]; //G
-	s[2] = bytes[1]; //R
-	s[3] = 0; //A
-}*/
-
-void	ft_color_pixel(char *s, char *s_tex) //has potential for: segmentation fault on Null pointer
+void	ft_color_pixel(char *s, char *s_tex)
 {
 	int	i;
 
@@ -94,68 +28,7 @@ void	ft_color_pixel(char *s, char *s_tex) //has potential for: segmentation faul
 	s[i] = 0; //is this needed? Test
 }
 
-/*void	ft_img_reset(t_vectors *v) //replace with draw sky and floor
-{
-	unsigned long int	i;
-	i = 4 * v->screen_h * v->screen_w - 1;
-	while (i > 0)
-	{
-		v->img_ptr[i--] = 0;
-	}
-}*/
-
-/*void	ft_img_verLine(t_vectors *v, int x, int	drawStart, int drawEnd) //draws vertical line for UNtextured raycasting
-{
-	char	*s;
-	if (x > v->screen_w || x < v->screen_w)
-		printf("x out of bounds\n");
-	if (drawStart > v->screen_h || drawStart < v->screen_h)
-		printf("drawStart out of bounds\n");
-	if (drawEnd > v->screen_h || drawEnd < v->screen_h)
-		printf("drawEnd out of bounds\n");
-	if (!v)
-		ft_error("received null pointer: ft_img_verLine");
-	s = v->img_ptr;
-	s += x * 4 + v->img_line_size * drawStart;
-	while (drawStart <= drawEnd)
-	{
-		ft_fill_pixel_color(s, color); //function that causes Exception / error!!!
-		s += v->img_line_size;
-		drawStart++;
-	}
-}*/
-
-/*void	ft_img_verLineTest(t_vectors *v, int x, int	drawStart, int drawEnd) //draws vertical line for UNtextured raycasting
-{
-	int		aux;
-	char	*s;
-	t_texture *t;
-	char	*s_tex;
-	int i;
-	int	desired_pixel;
-
-	if (!v)
-		ft_error("received null pointer: ft_img_verLineTest");
-	desired_pixel = 98;
-	i = 0;
-	t = v->textures[0];
-	s_tex = t->img_ptr + (desired_pixel * 4);
-	s = v->img_ptr;
-	s += x * 4 + v->img_line_size * drawStart;
-	while (drawStart <= drawEnd)
-	{
-		while (i < 4)
-		{
-			s[i] = s_tex[i];
-			i++;
-		}
-		i = 0;
-		s += v->img_line_size;
-		drawStart++;
-	}
-}*/
-
-void	ft_draw_vert(t_vectors *v, int x, int drawStart, int drawEnd, int tex_n) //TBI: draw sky and floor on same vertical
+void	ft_draw_vert(t_vectors *v, int x, int drawStart, int drawEnd, int tex_n)
 {
 	int			aux;
 	char		*s;
@@ -181,20 +54,6 @@ void	ft_draw_vert(t_vectors *v, int x, int drawStart, int drawEnd, int tex_n) //
 	}
 }
 
-/*void	ft_img_verLine(t_vectors *v, int x, int	drawStart, int drawEnd) //draws vertical line for UNtextured raycasting
-{
-	char	*s;
-
-	s = v->img_ptr;
-	s += x * 4 + v->img_line_size * drawStart;
-	while (drawStart <= drawEnd)
-	{
-		ft_fill_pixel_color(s, color); //function that causes Exception / error!!!
-		s += v->img_line_size;
-		drawStart++;
-	}
-}*/
-
 void	ft_draw_floor(t_vectors *v, int x, int drawEnd)
 {
 	int				horiz;
@@ -209,12 +68,12 @@ void	ft_draw_floor(t_vectors *v, int x, int drawEnd)
 		horiz = drawEnd;
 	s = v->img_ptr;
 	s += x * 4 + v->img_line_size * horiz;
-	while (horiz <= bottom)
+	while (horiz <= bottom - 1)
 	{
-		ft_memcpy(s,&v->floor->r, 1);
-		ft_memcpy(s + 1,&v->floor->g, 1);
-		ft_memcpy(s + 2,&v->floor->b, 1);
-		ft_memcpy(s + 3, "0", 1);
+		s[0] = (v->floor)->b;
+		s[1] = (v->floor)->g;
+		s[2] = (v->floor)->r;
+		s[3] = 0;
 		s += v->img_line_size;
 		horiz++;
 	}
@@ -223,36 +82,25 @@ void	ft_draw_floor(t_vectors *v, int x, int drawEnd)
 void	ft_draw_sky(t_vectors *v, int x, int drawStart)
 {
 	int				horiz;
-	int				i;
-	char	*s;
+	unsigned char	*s;
 
-	i = 0;
 	if (!v)
 		ft_error("received null pointer: ft_draw_sky");
 	if (!v->img_ptr)
 		ft_error("received null pointer: ft_draw_sky (img_ptr)");
-	horiz = v->screen_h / 2;
+	horiz = (v->screen_h) / 2;
 	if (horiz > drawStart)
 		horiz = drawStart;
-	s = v->img_ptr;
-	s += x * 4 + v->img_line_size * horiz;
-	while (i <= horiz)
+	s = (unsigned char *)v->img_ptr;
+	s += x * 4 + v->img_line_size;
+	while (horiz--)
 	{
-		s[0] = v->sky->r;
-		s[1] = v->sky->g;
-		s[2] = v->sky->b;
+		s[0] = (v->sky)->b;
+		s[1] = (v->sky)->g;
+		s[2] = (v->sky)->r;
 		s[3] = 0;
-		/*ft_memcpy(s, &v->sky->r, 1);
-		ft_memcpy(s + 1, &v->sky->g, 1);
-		ft_memcpy(s + 2, &v->sky->b, 1);
-		ft_memcpy(s + 3, 0, 1);
-		s += v->img_line_size;*/
-		i++;
+		s += v->img_line_size;
 	}
-}
-
-void	ft_set_fov(t_vectors *v) //TBI: modify FOV according to window aspect ratio
-{
 }
 
 void	ft_set_move_speed(t_vectors *v)	//TBI: record data at different pixel counts vs fps and find a valid plot
@@ -285,41 +133,26 @@ int		ft_choose_wall_texture(t_vectors *v)
 
 void	ft_raycasting(t_vectors *v)
 {
-	int		h;
 	int		x;
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
-	int		color; //used for untextured surfaces (i.e. floor and sky)
 	int		texNum;
 
 	if (!v)
 		ft_error("received null pointer: ft_raycasting");
 	printf("ft_raycasting_s: frame: %d\n", v->debug_frame++);
 	x = 0;
-	h = v->screen_h;
-	while(x < v->screen_w) //for every vert. line on open window
+	while(x < v->screen_w)
     {
-      //calculate ray position and direction
-     v->camera_y = 2 * x / (double)v->screen_w - 1; //x-coordinate in camera space
+     v->camera_y = 2 * x / (double)v->screen_w - 1;
      v->raydir_y = v->dir_y + v->plane_y * v->camera_y;
      v->raydir_x = v->dir_x + v->plane_x * v->camera_y;
-      //which box of the map we're in
      v->map_y = (int)v->pos_y;
      v->map_x = (int)v->pos_x;
-	 //printf("map_x:<%d>; pos_x <%d>; map_y: <%d>; pos_y: <%d>\n", v->map_x, (int)v->pos_x, v->map_y, (int)v->pos_y);
-
-      //length of ray from current position to next x or y-side
-
-       //length of ray from one x or y-side to next x or y-side
       v->delta_dist_y = fabs(1 / v->raydir_y);
       v->delta_dist_x = fabs(1 / v->raydir_x);
-
-      //what direction to step in x or y-direction (either +1 or -1)
-
-      v->hit = 0; //was there a wall hit?
-      //was a NS or a EW wall hit?
-      //calculate step and initial sideDist
+      v->hit = 0;
       if(v->raydir_y < 0)
       {
         v->step_y = -1;
@@ -343,7 +176,6 @@ void	ft_raycasting(t_vectors *v)
       //perform DDA
       while (v->hit == 0)
       {
-        //jump to next map square, OR in x-direction, OR in y-direction
         if(v->side_dist_y < v->side_dist_x)
         {
           v->side_dist_y += v->delta_dist_y;
@@ -356,60 +188,39 @@ void	ft_raycasting(t_vectors *v)
           v->map_x += v->step_x;
           v->side = 1;
         }
-        //Check if ray has hit a wall
         if(v->map[v->map_y][v->map_x] > '0' && v->map[v->map_y][v->map_x] <= '2')
 			v->hit = 1;
       }
-      //Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
       if(v->side == 0)
 	  	v->perp_wall_dist = (v->map_y - v->pos_y + (1 - v->step_y) / 2) / v->raydir_y;
       else
 	  	v->perp_wall_dist = (v->map_x - v->pos_x + (1 - v->step_x) / 2) / v->raydir_x;
-	//if (x == 2)
-	//	printf("dir x, y: <%.2f>/<%.2f>; plane x/y: <%.2f>/<%.2f>; raydir x/y: <%.2f / %.2f>; side: <%d>\n", v->dir_x, v->dir_y, v->plane_x, v->plane_y, v->raydir_x, v->raydir_y, v->side);
-      //Calculate height of line to draw on screen
-      lineHeight = (int)(h / v->perp_wall_dist);
-
+      lineHeight = (int)(v->screen_h / v->perp_wall_dist);
       //calculate lowest and highest pixel to fill in current stripe
-      drawStart = -lineHeight / 2 + h / 2;
+      drawStart = -lineHeight / 2 + v->screen_h / 2;
       if(drawStart < 0)
 	  	drawStart = 0;
-      drawEnd = lineHeight / 2 + h / 2;
-      if(drawEnd > h)
-	  	   drawEnd = h;
-
-		//texturing calculations
-      //texNum = worldMap[v->map_y][v->map_x] - 1; //1 subtracted from it so that texture 0 can be used!
+      drawEnd = lineHeight / 2 + v->screen_h / 2;
+      if(drawEnd > v->screen_h)
+	  	   drawEnd = v->screen_h;
 	  texNum = ft_choose_wall_texture(v);
-      //calculate value of wall_y
-      //where exactly the wall was hit
       if(v->side == 0)
 	  	v->wall_y = v->pos_x + v->perp_wall_dist * v->raydir_x;
       else
 	  	v->wall_y = v->pos_y + v->perp_wall_dist * v->raydir_y;
-      v->wall_y -= (double)((int)v->wall_y);//floor((wall_y));  !!!!!!!!!!!!! may Break
-
-      //x coordinate on the texture
-      v->tex_y = (int)(v->wall_y * (double)((v->textures[texNum])->tex_w)); //EXC_BAD_ACCESS - suspected textures
+      v->wall_y -= (double)((int)v->wall_y);
+      v->tex_y = (int)(v->wall_y * (double)((v->textures[texNum])->tex_w));
       if(v->side == 0 && v->raydir_y > 0)
 	  	v->tex_y = (v->textures[texNum])->tex_w - v->tex_y - 1;
       if(v->side == 1 && v->raydir_x < 0)
 	  	v->tex_y = (v->textures[texNum])->tex_w - v->tex_y - 1;
-
-      // How much to increase the texture coordinate per screen pixel
       v->step = 1.0 * (v->textures[texNum])->tex_h / lineHeight;
-      // Starting texture coordinate
-	  //REMOVE WHEN DONE double testPos = (drawStart - h / 2 + lineHeight / 2) * v->step;
-      v->tex_pos = (drawStart - h / 2 + lineHeight / 2) * v->step;
-	  //printf("..................................................................\n");
-	  //printf("tex_pos: <%f>; lineHeight: <%d>\n", v->tex_pos, lineHeight);
-	  //printf("..................................................................\n");
-	  ft_draw_sky(v, x, drawStart);//FIX: This line causes a segfault!!! fixed?
-	  //ft_draw_floor(v, x, drawEnd);//FIX: This line causes a segfault!!! fixed?
-	  ft_draw_vert(v, x, drawStart, drawEnd, texNum);//FIX: This line causes a segfault!!! fixed?
+      v->tex_pos = (drawStart - v->screen_h / 2 + lineHeight / 2) * v->step;
+	  ft_draw_sky(v, x, drawStart);
+	  ft_draw_floor(v, x, drawEnd);
+	  ft_draw_vert(v, x, drawStart, drawEnd, texNum);
 		x++;
 	}
-	//printf("tex ptr: img: %p\n", (v->textures[0])->img);	
 	if (!v)
 		ft_error("v is null pointer in: ft_raycasting");
 	if (!(v->mlx))
@@ -498,9 +309,9 @@ int		ft_press_key(int key, void *param)
 {
 	t_vectors	*v;
 
+	v = (t_vectors *)(param);
 	if (!v)
 		ft_error("received null pointer: ft_press_key");
-	v = (t_vectors *)(param);
 	if (key == KEY_ESC)
 	{
 		ft_putstr("\nPressed Esc, closing window - Bye! (FIX me)\n");
@@ -527,9 +338,9 @@ int		ft_release_key(int key, void *param)
 {
 	t_vectors	*v;
 
+	v = (t_vectors *)(param);
 	if (!v)
 		ft_error("received null pointer: ft_release_key");
-	v = (t_vectors *)(param);
 	if (key == KEY_W)
 		v->flag_key_w_down = 0;
     if(key == KEY_S)
@@ -599,13 +410,12 @@ void	ft_raycaster_defaults(t_vectors *v)
 
 	if (!v)
 		ft_error("received null pointer: ft_raycaster_defaults");
-	ft_set_orientation(v);
-	v->sky->r = (char)255;
-	v->sky->g = 150;
-	v->sky->b = 150;
-	v->floor->r = 180;
-	v->floor->g = 100;
-	v->floor->b = 100;
+	v->sky->r = 130;
+	v->sky->g = 180;
+	v->sky->b = 255;
+	v->floor->r = 170;
+	v->floor->g = 140;
+	v->floor->b = 120;
 	v->pos_x = 3; //22
 	v->pos_y = 3; //22
 	v->screen_h = SH;
@@ -633,10 +443,10 @@ void	ft_load_textures(t_vectors *v)
 	i = 0;
 	if (!v)
 		ft_error("received null pointer: ft_load_textures");
-	ft_load_tex_files(v);
+	ft_load_tex_files(v); //Tested: does not seem to cause segfault
 	while (i < 4)
 	{
-		if (!(tex = (t_texture *)malloc(sizeof(t_texture))))
+		if (!(tex = /*(t_texture *)*/malloc(sizeof(t_texture))))
 			ft_error("Not enough memory for texture (malloc)");
 		if (!(tex->img = mlx_xpm_file_to_image(v->mlx, v->tex_files[i], &(tex->tex_w), &(tex->tex_h))))
 			ft_error("Could not read texture");  // TBI: send char * of which tex could not be read
@@ -659,6 +469,7 @@ void	ft_mlx_start(t_vectors *v)
 	ft_vectors_initialise(v);
 	ft_raycaster_defaults(v);
 	ft_process_cub_file(v);
+	ft_set_orientation(v);
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->screen_w, v->screen_h, WIN_NAME); //create new WINDOW
 	v->img = mlx_new_image(v->mlx, v->screen_w, v->screen_h);
@@ -685,24 +496,6 @@ void	ft_cub3d(void)
 	//exit(0);
 	printf("ft_cub3d: done loop hook, next is mlx_loop\n");
 	mlx_loop(v.mlx); //EXC_BAD_ACCESS (address= 0x20)
-}
-
-
-void test_gnl(void)
-{
-    char *line;
-	
-	line = 0;
-    int fd = open("eg.txt", O_RDONLY);
-    int n;
-    while ((n = ft_get_next_line(fd, &line)))
-    {
-		if (line)
-		{
-    	    printf("***** OUT<%d>: <%s> *****\n", n, line);
-			free(line);
-		}
-    }
 }
 
 int	main (void)//int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/09 19:38:36 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/10 19:51:34 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void			ft_print_tmp_map(t_str_list *tmp_map);
 void			ft_check_map(t_vectors *v, t_str_list *tmp_map);
 void			ft_create_map(t_vectors *v, t_str_list *tmp_map);
 void			ft_check_config(t_vectors *v, const char *c);
+void			ft_load_player_position(t_vectors *v);
 char			*ft_chars_in_str(const char *chars, const char *str);
 char			*ft_strstr(const char *s1, const char *s2);
 void			*ft_memcpy(void *dst, const void *src, size_t n);

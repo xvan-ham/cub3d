@@ -1,5 +1,17 @@
 # Changelog - Dev Branch
 
+## v0.35
+Working raycaster with basic map processing. (Still incomplete but this version is stable)
+* Major debugging patch - no more _segfaults_ on launch.
+* Fixed a re-curring segfault.
+  - Problem lied in texture-loading fuction, malloc for texture (t_texture **) list wass _NOT_ multiplied by *4* to accomodate for the 4 texture pointers (t_texture *) - now corrected.
+  - An additional issue was the last pixel of floor was sometimes exceeding array bounds.
+* Fixed / implemented working color assignment for sky and floor.
+#### Known Issues:
+* Getting consistent _segfault_ when crashing into map-edge walls at angles which permit penetrating the wall slightly (establish a maximum ray travel distance).
+* Getting stuck on walls is also possible.
+* ft_strlen for the first string in tmp_map str_list sometimes gives an excessively large return value.
+
 ## v0.346	
 * Made format changes to version history files (md files).
 
@@ -8,7 +20,7 @@
 
 ## v0.34
 * Made format changes to version history files (md files).
-* Made changes for raycaster to use new map and sky & floor to be drawn using R, G, B int values rather than "color".
+* Made changes for raycaster to use new map and sky & floor to be drawn using _R_, _G_, _B_ int values rather than "color".
 * *NOT* currently working, still in the middle of changing / testing.
 
 
@@ -18,9 +30,9 @@
 * Added function to create a matrix in given dimensions.
 * Added search functions in aux.c (will be moved later due to norminette restrictions).
 * Added ft_cub_settings_set_settings.c which will parse all lines related with settings (resolutions, paths to textures, etc): TBI.
-	*Note*: frame-drawing has been stopped (with exit(1) in order to test map reading functions).
-	*TBI*:
-	* Full map verification.
+  - *Note*: frame-drawing has been stopped (with exit(1) in order to test map reading functions).
+  - *TBI*:
+    * Full map verification.
 	* Make raycaster use the newly created map.
 	* ft_cub_settings_set_settings.c line parsing for settings	
 
