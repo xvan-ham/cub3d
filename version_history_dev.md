@@ -1,5 +1,15 @@
 # Changelog - Dev Branch
 
+### v0.36
+* Restructured code layout into folders for clarity. Started initial norminette compliance. Raycasting function being broken down.
+* Added flood-fill algorythm to check map-leaks (ft_cub_settings_map_floodcheck).
+* Added 2 lines in ft_getmapstr() (ft_cub_settings_map_reading.c) to detect illegal characters in map. 
+* Now spawn at centre of a coordinate (visually displeasing when there's a wall).
+* Map error-proofing seems to be complete at this stage (further testing required to confirm this).
+* Fixed a bug that would occasionally cause the second line of the map to be appended to the first line (whilst still being represented in the second line). This bug had the potential to cause segfaults as malloc'ed heap memory was smaller than copied string (when this bug occurred).
+* Fixed getting stuck when strafing sideways into a wall.
+* Fixed segfaults in map extremes, functions will check that values don't go beyond matrix limits.
+
 ### v0.355
 No changes on current dev branch behaviour.
 Added a testing environment for flood-fill algorithmn (as a folder) with necessary files.

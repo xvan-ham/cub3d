@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/14 13:45:42 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/14 18:27:44 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ static void	ft_add_to_tmp_map(t_vectors *v, const char *c, t_str_list **tmp_map)
 void		ft_parse_line(t_vectors *v, const char *c, t_str_list **tmp_map,
 	int *flag_map)
 {
-	char		*debug;
 
 	//ft_check_config(v, c);
-	if ((debug = ft_chars_in_str("012NSWE", c)))
+	if ((ft_chars_in_str("012NSWE", c)))
 	{
 		*flag_map = 1;
 		ft_add_to_tmp_map(v, c, tmp_map);

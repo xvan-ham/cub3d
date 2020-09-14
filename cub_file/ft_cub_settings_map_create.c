@@ -6,13 +6,13 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:16:15 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/10 17:43:32 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
-static void	ft_print_map(t_vectors *v, char **map)
+void	ft_print_map(t_vectors *v, char **map)
 {
 	if (!v || !map)
 		ft_error("null pointer passed to ft_print_map");

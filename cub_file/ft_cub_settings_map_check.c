@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:35:23 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/10 20:27:14 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
 static int	ft_get_map_height(t_vectors *v, t_str_list *tmp_map)
 {
@@ -46,6 +46,44 @@ static int	ft_get_map_width(t_vectors *v, t_str_list *tmp_map)
 	}
 	return(max);
 }
+
+void flood_fill(t_vectors *v, char **map, int x, int y) 
+{
+	if (x < 0 || x > v->map_width - 1 || y < 0 || y > v->map_height - 1)
+		return ; 
+    if (ft_strchr("ZY", map[y][x]))
+	{ 
+		if (map[y][x] == 'Y')
+			map[y][x] = '2';
+		else
+			map[y][x] = '0';
+		flood_fill(v, map, x + 1, y); 
+		flood_fill(v, map, x - 1, y); 
+		flood_fill(v, map, x, y + 1); 
+		flood_fill(v, map, x, y - 1); 
+    }
+}
+ 
+void flood(t_vectors *v, char **map, int x, int y) 
+{
+	if (x < 0 || x > v->map_width - 1 || y < 0 || y > v->map_height - 1)
+		return ; 
+    if (ft_strchr("02NSWE", map[y][x]))
+	{ 
+		if (!x || !y || x >= v->map_width -1 || y >= v->map_height - 1)
+			ft_error("Map leak!");
+        if (map[y][x] == '2')
+			map[y][x] = 'Y';
+		else
+			map[y][x] = 'Z';
+		flood(v, map, x + 1, y); 
+		flood(v, map, x - 1, y); 
+		flood(v, map, x, y + 1); 
+		flood(v, map, x, y - 1); 
+    }
+	if (map[y][x] == 'X')
+		ft_error("Map leak!");
+} 
 
 void	ft_check_map(t_vectors *v, t_str_list *tmp_map) //TBI: Add map validation
 {

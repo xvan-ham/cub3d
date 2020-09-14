@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 20:10:45 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/10 20:27:27 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/14 20:08:02 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,179 +131,8 @@ int		ft_choose_wall_texture(t_vectors *v)
 	return (3);
 }
 
-void	ft_raycasting(t_vectors *v)
-{
-	int		x;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
-	int		texNum;
 
-	if (!v)
-		ft_error("received null pointer: ft_raycasting");
-	printf("ft_raycasting_s: frame: %d\n", v->debug_frame++);
-	x = 0;
-	while(x < v->screen_w)
-    {
-     v->camera_y = 2 * x / (double)v->screen_w - 1;
-     v->raydir_y = v->dir_y + v->plane_y * v->camera_y;
-     v->raydir_x = v->dir_x + v->plane_x * v->camera_y;
-     v->map_y = (int)v->pos_y;
-     v->map_x = (int)v->pos_x;
-      v->delta_dist_y = fabs(1 / v->raydir_y);
-      v->delta_dist_x = fabs(1 / v->raydir_x);
-      v->hit = 0;
-      if(v->raydir_y < 0)
-      {
-        v->step_y = -1;
-        v->side_dist_y = (v->pos_y - v->map_y) * v->delta_dist_y;
-      }
-      else
-      {
-        v->step_y = 1;
-        v->side_dist_y = (v->map_y + 1.0 - v->pos_y) * v->delta_dist_y;
-      }
-      if(v->raydir_x < 0)
-      {
-        v->step_x = -1;
-        v->side_dist_x = (v->pos_x - v->map_x) * v->delta_dist_x;
-      }
-      else
-      {
-        v->step_x = 1;
-        v->side_dist_x = (v->map_x + 1.0 - v->pos_x) * v->delta_dist_x;
-      }
-      //perform DDA
-      while (v->hit == 0)
-      {
-        if(v->side_dist_y < v->side_dist_x)
-        {
-          v->side_dist_y += v->delta_dist_y;
-          v->map_y += v->step_y;
-          v->side = 0;
-        }
-        else
-        {
-          v->side_dist_x += v->delta_dist_x;
-          v->map_x += v->step_x;
-          v->side = 1;
-        }
-        if(v->map[v->map_y][v->map_x] > '0' && v->map[v->map_y][v->map_x] <= '2')
-			v->hit = 1;
-      }
-      if(v->side == 0)
-	  	v->perp_wall_dist = (v->map_y - v->pos_y + (1 - v->step_y) / 2) / v->raydir_y;
-      else
-	  	v->perp_wall_dist = (v->map_x - v->pos_x + (1 - v->step_x) / 2) / v->raydir_x;
-      lineHeight = (int)(v->screen_h / v->perp_wall_dist);
-      //calculate lowest and highest pixel to fill in current stripe
-      drawStart = -lineHeight / 2 + v->screen_h / 2;
-      if(drawStart < 0)
-	  	drawStart = 0;
-      drawEnd = lineHeight / 2 + v->screen_h / 2;
-      if(drawEnd > v->screen_h)
-	  	   drawEnd = v->screen_h;
-	  texNum = ft_choose_wall_texture(v);
-      if(v->side == 0)
-	  	v->wall_y = v->pos_x + v->perp_wall_dist * v->raydir_x;
-      else
-	  	v->wall_y = v->pos_y + v->perp_wall_dist * v->raydir_y;
-      v->wall_y -= (double)((int)v->wall_y);
-      v->tex_y = (int)(v->wall_y * (double)((v->textures[texNum])->tex_w));
-      if(v->side == 0 && v->raydir_y > 0)
-	  	v->tex_y = (v->textures[texNum])->tex_w - v->tex_y - 1;
-      if(v->side == 1 && v->raydir_x < 0)
-	  	v->tex_y = (v->textures[texNum])->tex_w - v->tex_y - 1;
-      v->step = 1.0 * (v->textures[texNum])->tex_h / lineHeight;
-      v->tex_pos = (drawStart - v->screen_h / 2 + lineHeight / 2) * v->step;
-	  ft_draw_sky(v, x, drawStart);
-	  ft_draw_floor(v, x, drawEnd);
-	  ft_draw_vert(v, x, drawStart, drawEnd, texNum);
-		x++;
-	}
-	if (!v)
-		ft_error("v is null pointer in: ft_raycasting");
-	if (!(v->mlx))
-		ft_error("mlx is null pointer in: ft_raycasting");
-	if (!(v->win))
-		ft_error("mlx is null pointer in: ft_raycasting");
-	if (!(v->img))
-		ft_error("mlx is null pointer in: ft_raycasting");
-	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
-}
 
-int		ft_move(t_vectors *v)
-{
-	ft_putstr(">");
-	if (!v)
-		ft_error("received null pointer: ft_move");
-	v->flag_stuck = 0;// improve stuck, create another function that checks in all directions
-	if (v->flag_key_w_down)
-	{
-		if(v->map[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] == '0')
-			v->pos_y += v->dir_y * v->move_speed;
-		if(v->map[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)] == '0')
-			v->pos_x += v->dir_x * v->move_speed;
-		if (v->map[(int)(v->pos_y + v->dir_y * v->move_speed)][(int)(v->pos_x)] ||
-			v->map[(int)(v->pos_y)][(int)(v->pos_x + v->dir_x * v->move_speed)])
-			v->flag_stuck = 1;
-
-	}
-	if (v->flag_key_s_down)
-	{
-		if(v->map[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] == '0')
-			v->pos_y -= v->dir_y * v->move_speed;
-		if(v->map[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)] == '0')
-			v->pos_x -= v->dir_x * v->move_speed;
-		if (v->map[(int)(v->pos_y - v->dir_y * v->move_speed)][(int)(v->pos_x)] ||
-			v->map[(int)(v->pos_y)][(int)(v->pos_x - v->dir_x * v->move_speed)])
-			v->flag_stuck = 1;
-	}
-	if (v->flag_key_a_down)
-	{
-		if(v->map[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] =='0')
-			v->pos_y -= v->plane_y * v->move_speed;
-		if(v->map[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] =='0')
-			v->pos_x -= v->plane_x * v->move_speed;
-		if (v->map[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] ||
-			v->map[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)])
-			v->flag_stuck = 1;
-	}
-	if (v->flag_key_d_down)
-	{
-		if(v->map[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] =='0')
-			v->pos_y += v->plane_y * v->move_speed;
-		if(v->map[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)] =='0')
-			v->pos_x += v->plane_x * v->move_speed;
-		if (v->map[(int)(v->pos_y + v->plane_y * v->move_speed)][(int)(v->pos_x)] ||
-			v->map[(int)(v->pos_y)][(int)(v->pos_x + v->plane_x * v->move_speed)])
-			v->flag_stuck = 1;
-	}
-	if (v->flag_key_right_down)
-	{
-      //both camera direction and camera plane must be rotated
-      double olddir_y = v->dir_y;
-      v->dir_y = v->dir_y * cos(-v->rot_speed) - v->dir_x * sin(-v->rot_speed);
-      v->dir_x = olddir_y * sin(-v->rot_speed) + v->dir_x * cos(-v->rot_speed);
-      double oldplane_y = v->plane_y;
-      v->plane_y = v->plane_y * cos(-v->rot_speed) - v->plane_x * sin(-v->rot_speed);
-      v->plane_x = oldplane_y * sin(-v->rot_speed) + v->plane_x * cos(-v->rot_speed);
-	}
-	if (v->flag_key_left_down)
-	{
-      //both camera direction and camera plane must be rotated
-      double olddir_y = v->dir_y;
-      v->dir_y = v->dir_y * cos(v->rot_speed) - v->dir_x * sin(v->rot_speed);
-      v->dir_x = olddir_y * sin(v->rot_speed) + v->dir_x * cos(v->rot_speed);
-      double oldplane_y = v->plane_y;
-      v->plane_y = v->plane_y * cos(v->rot_speed) - v->plane_x * sin(v->rot_speed);
-      v->plane_x = oldplane_y * sin(v->rot_speed) + v->plane_x * cos(v->rot_speed);
-	}
-	if (v->flag_stuck)
-		ft_putstr("\nSTUCK\n");
-	ft_raycasting(v);
-	return (0);
-}
 
 int		ft_press_key(int key, void *param)
 {
@@ -370,10 +199,10 @@ void	ft_set_hooks(t_vectors *v)
 	mlx_hook(v->win, 17, 0, ft_exit, v);
 }
 
-void	ft_set_orientation(t_vectors *v)
+void	ft_set_orientation_params(t_vectors *v)
 {
 	if (!v)
-		ft_error("received null pointer: ft_set_orientation");
+		ft_error("received null pointer: ft_set_orientation_params");
 	if (v->orientation == N)
 	{
 		v->dir_x = 0;
@@ -469,7 +298,7 @@ void	ft_mlx_start(t_vectors *v)
 	ft_vectors_initialise(v);
 	ft_raycaster_defaults(v);
 	ft_process_cub_file(v);
-	ft_set_orientation(v);
+	ft_set_orientation_params(v);
 	v->mlx = mlx_init();
 	v->win = mlx_new_window(v->mlx, v->screen_w, v->screen_h, WIN_NAME); //create new WINDOW
 	v->img = mlx_new_image(v->mlx, v->screen_w, v->screen_h);

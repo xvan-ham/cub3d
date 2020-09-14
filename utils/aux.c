@@ -6,18 +6,17 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:12:28 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/10 19:44:59 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/14 19:24:13 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
 void	ft_vectors_initialise(t_vectors *v)
 {
 	if (!v)
 		ft_error("received null pointer: ft_vectors_initialise");
 	printf("ft_vectors_initialise_s\n");
-	v->debug_frame = 1;
 	v->win = 0;
 	v->img = 0;
 	v->img_ptr = 0;
@@ -37,8 +36,7 @@ void	ft_vectors_initialise(t_vectors *v)
 	v->flag_key_d_down = 0;
 	v->flag_key_left_down = 0;
 	v->flag_key_right_down = 0;
-	v->flag_stuck = 0;
-	v->orientation = N;
+	v->orientation = -1;
 	v->fov = 0.66;//0.66
 	v->map_height = 0;
 	v->map_width = 0;

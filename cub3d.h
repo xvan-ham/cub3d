@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/10 19:51:34 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/14 20:08:44 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct		s_color
 
 typedef struct	s_vectors
 {
-	unsigned int			debug_frame;
 	void		*win;//window indentifier
 	void		*img;
 	char		*img_ptr;
@@ -94,7 +93,6 @@ typedef struct	s_vectors
 	int			flag_key_d_down;
 	int			flag_key_right_down;
 	int			flag_key_left_down;
-	int			flag_stuck;
 	int			map_width;
 	int			map_height;
 	int			map_y;
@@ -156,5 +154,23 @@ void			ft_load_player_position(t_vectors *v);
 char			*ft_chars_in_str(const char *chars, const char *str);
 char			*ft_strstr(const char *s1, const char *s2);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
+void			ft_print_map(t_vectors *v, char **map);
+void			ft_floodcheck(t_vectors *v, int pos_x, int pos_y);
+int				ft_move(t_vectors *v);
+void			ft_raycasting(t_vectors *v);
+void			flag_right(t_vectors *v, int flag);
+void			flag_left(t_vectors *v, int flag);
+void			ft_color_pixel(char *s, char *s_tex);
+void			ft_draw_vert(t_vectors *v, int x, int drawStart, int drawEnd, int tex_n);
+void			ft_draw_floor(t_vectors *v, int x, int drawEnd);
+void			ft_draw_sky(t_vectors *v, int x, int drawStart);
+int				ft_choose_wall_texture(t_vectors *v);
+int				ft_release_key(int key, void *param);
+int				ft_exit(int key);
+void			ft_set_orientation_params(t_vectors *v);
+void			ft_raycaster_defaults(t_vectors *v);
+void			ft_load_tex_files(t_vectors *v);
+void			ft_load_textures(t_vectors *v);
+void			ft_mlx_start(t_vectors *v);
 
 #endif

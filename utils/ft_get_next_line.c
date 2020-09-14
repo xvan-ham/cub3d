@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 19:35:01 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/02 20:29:50 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** If no '\n' is found in 'str', function returns a NULL pointer.
 */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
 /*
 ** Function: size_t	ft_strlen_delim(const char *s, char delim)

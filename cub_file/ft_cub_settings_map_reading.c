@@ -6,13 +6,13 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/08 20:04:42 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
-static char	*ft_getmapstr(const char *c)
+static char	*ft_getmapstr(const char *c) //NOT the cause of long first element str
 {
 	int			len;
 	const char	*aux;
@@ -22,6 +22,8 @@ static char	*ft_getmapstr(const char *c)
 	len = 0;
 	while (ft_chars_in_str("012NSWE", c))
 	{
+		if (!ft_strchr(" 012NSWE", *c))
+			ft_error("Illegal character(s) in map"); 
 		len++;
 		c++;
 	}
@@ -29,11 +31,12 @@ static char	*ft_getmapstr(const char *c)
 	if (!(str = (char *)malloc((1 + len) * sizeof(char))))
 		ft_error("Malloc for a str in ft_read_map failed");
 	aux = str;
-	while (*c && ft_strchr(" 012NSEW", *c))
+	while (len-- && ft_strchr(" 012NSEW", *c))
 	{
 		*(str++) = *(c++);
 	}
 	*str = 0;
+	printf("<%s>\n", (char *)aux);
 	return ((char *)aux);
 }
 
@@ -62,18 +65,13 @@ static void	ft_add_to_tmp_map(t_vectors *v, const char *c, t_str_list **tmp_map)
 void		ft_parse_line(t_vectors *v, const char *c, t_str_list **tmp_map,
 	int *flag_map)
 {
-	char		*debug;
-
 	//ft_check_config(v, c);
-	if ((debug = ft_chars_in_str("012NSWE", c)))
+	if (ft_chars_in_str("012NSWE", c))
 	{
 		*flag_map = 1;
 		ft_add_to_tmp_map(v, c, tmp_map);
 		free((void *)c);
 		return ;
-	}
-	else {
-		printf("%s\n", debug);
 	}
 	if (*flag_map)
 	{
