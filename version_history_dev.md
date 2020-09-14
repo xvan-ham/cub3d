@@ -1,7 +1,7 @@
 # Changelog - Dev Branch
 
 ### v0.36
-* Restructured code layout into folders for clarity. Started initial norminette compliance. Raycasting function being broken down.
+* Restructured code layout into folders for clarity. Started initial norminette compliance. Raycasting function broken down for norminette compliance (compliance incomplete as of yet).
 * Added flood-fill algorythm to check map-leaks (ft_cub_settings_map_floodcheck).
 * Added 2 lines in ft_getmapstr() (ft_cub_settings_map_reading.c) to detect illegal characters in map. 
 * Now spawn at centre of a coordinate (visually displeasing when there's a wall).
