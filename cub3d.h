@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:52:45 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/15 20:28:00 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define S 3
 # define SW 1500
 # define SH 1000
+# define SCREEN_WIDTH_LL 100
+# define SCREEN_WIDTH_UL 3072
+# define SCREEN_HEIGHT_LL 100
+# define SCREEN_HEIGHT_UL 1920
 # define WIN_NAME "Cub3D"
 # define PARAM_MOV_SPEED 0.03
 # define PARAM_ROT_SPEED 0.04
@@ -173,5 +177,7 @@ void					ft_load_tex_files(t_vectors *v);
 void					ft_load_textures(t_vectors *v);
 void					ft_mlx_start(t_vectors *v);
 void					ft_cub3d(void);
+void					ft_add_to_tmp_map(t_vectors *v, const char *c, t_str_list **tmp_map);
+int						ft_atoi(const char *string);
 
 #endif

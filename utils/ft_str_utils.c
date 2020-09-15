@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:36:13 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:39:25 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/15 19:54:38 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*ft_strstr(const char *s1, const char *s2)
 
 char	*ft_chars_in_str(const char *chars, const char *str)
 {
-	if (*str == 0)
+	if (!chars || !str || *str == 0)
 		return (0);
 	while (*str && !(ft_strchr(chars, *str)))
 		str++;

@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:10:34 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:27:29 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/15 19:20:44 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	ft_load_tex_files(t_vectors *v)
 {
 	if (!v)
 		ft_error("received null pointer: ft_load_tex_files");
-	v->tex_files[0] = ft_strdup("../Textures/brick_4.xpm");
-	v->tex_files[1] = ft_strdup("../Textures/brick_1.xpm");
-	v->tex_files[2] = ft_strdup("../Textures/brick_2.xpm");
-	v->tex_files[3] = ft_strdup("../Textures/brick_3.xpm");
+	v->tex_files[0] = ft_strdup("./Textures/brick_4.xpm");
+	v->tex_files[1] = ft_strdup("./Textures/brick_1.xpm");
+	v->tex_files[2] = ft_strdup("./Textures/brick_2.xpm");
+	v->tex_files[3] = ft_strdup("./Textures/brick_3.xpm");
 }
 
 void	ft_load_textures(t_vectors *v)

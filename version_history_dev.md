@@ -1,5 +1,8 @@
 # Changelog - Dev Branch
 
+### v0.45
+* Added _resolution_ info processing in _.cub_ file. Performs data validation on the line and checks min max limits of given resolution, adjusting each dimention to the closest allowed value. For instance a resolution width above the established maximum resoution width will adjust the width to the allowed maximum after a console message.
+
 ### v0.4
 * *Restructured* entire codebase to be *more organised* and entirely norminette-compliant. 
 

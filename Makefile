@@ -12,6 +12,7 @@ SRCS		=	main.c							\
 				ft_cub3d_utils.c		\
 				./utils/ft_error.c							\
 				./utils/ft_putnbr.c							\
+				./utils/ft_atoi.c							\
 				./utils/ft_putstr.c							\
 				./utils/ft_str_utils.c					\
 				./utils/ft_get_next_line_utils.c		\
@@ -19,6 +20,7 @@ SRCS		=	main.c							\
 				./cub_file/ft_cub_settings.c				\
 				./utils/ft_str_list_functions.c			\
 				./cub_file/ft_cub_settings_map_reading.c	\
+				./cub_file/ft_cub_settings_read.c	\
 				./cub_file/ft_cub_settings_map_check.c		\
 				./cub_file/ft_cub_settings_set_settings.c	\
 				./cub_file/ft_cub_settings_player_pos.c	\
