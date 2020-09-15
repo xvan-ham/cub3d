@@ -1,5 +1,15 @@
 # Changelog - Master
 
+### v0.4
+* *Restructured* entire codebase to be *more organised* and entirely norminette-compliant. 
+* Added flood-fill algorythm to check map-leaks (*ft_cub_settings_map_floodcheck()).
+* Added 2 lines in *ft_getmapstr()* (*ft_cub_settings_map_reading.c*) to detect illegal characters in map. 
+* Now spawn at centre of a coordinate (before fix it was visually displeasing when there was a wall right in front of spawn).
+* Map error-proofing seems to be complete at this stage (further testing required to confirm this).
+* Fixed a bug that would occasionally cause the second line of the map to be appended to the first line (whilst still being represented in the second line). This bug had the potential to cause segfaults as malloc'ed heap memory was smaller than copied string (when this bug occurred).
+* Fixed getting stuck when strafing sideways into a wall.
+* Fixed segfaults in map extremes, functions will check that values don't go beyond matrix limits.
+
 ## v0.35
 Working raycaster with basic map processing. (Still incomplete but this version is stable)
 * Major debugging patch - no more _segfaults_ on launch.

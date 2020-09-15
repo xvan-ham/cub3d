@@ -4,7 +4,16 @@ SRCS		=	main.c							\
 				ft_move.c						\
 				ft_move_utils.c						\
 				ft_raycasting.c						\
-				./utils/aux.c							\
+				ft_drawfunctions.c					\
+				ft_cub3d_vectorinit.c		\
+				ft_key_events.c			\
+				ft_cub3d.c			\
+				ft_textures.c		\
+				ft_cub3d_utils.c		\
+				./utils/ft_error.c							\
+				./utils/ft_putnbr.c							\
+				./utils/ft_putstr.c							\
+				./utils/ft_str_utils.c					\
 				./utils/ft_get_next_line_utils.c		\
 				./utils/ft_get_next_line.c				\
 				./cub_file/ft_cub_settings.c				\

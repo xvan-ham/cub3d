@@ -6,33 +6,34 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:34:49 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/15 17:57:23 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-
 void	ft_process_cub_file(t_vectors *v)
 {
-    char		*line;
+	char		*line;
 	t_str_list	*tmp_map;
 	int			flag_parsing_map;
+	int			fd;
+	int			n;
 
 	flag_parsing_map = 0;
 	tmp_map = 0;
 	line = 0;
-    int fd = open("settings.cub", O_RDONLY);
-    int n;
-    while ((n = ft_get_next_line(fd, &line)))
-    {
+	fd = open("settings.cub", O_RDONLY);
+	while ((n = ft_get_next_line(fd, &line)))
+	{
 		if (line)
 			ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
-    }
+	}
 	if (n < 0)
 		ft_error("ft_get_next_line returned an error in ft_process_cub_file");
 	ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
-	ft_print_tmp_map(tmp_map); //enable to print tmp_map
+	close(fd);
+	ft_print_tmp_map(tmp_map);
 	ft_check_map(v, tmp_map);
 	ft_create_map(v, tmp_map);
 	ft_load_player_position(v);

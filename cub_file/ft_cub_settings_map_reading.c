@@ -6,13 +6,13 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:36:02 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static char	*ft_getmapstr(const char *c) //NOT the cause of long first element str
+static char	*ft_getmapstr(const char *c)
 {
 	int			len;
 	const char	*aux;
@@ -23,7 +23,7 @@ static char	*ft_getmapstr(const char *c) //NOT the cause of long first element s
 	while (ft_chars_in_str("012NSWE", c))
 	{
 		if (!ft_strchr(" 012NSWE", *c))
-			ft_error("Illegal character(s) in map"); 
+			ft_error("Illegal character(s) in map");
 		len++;
 		c++;
 	}
@@ -61,11 +61,9 @@ static void	ft_add_to_tmp_map(t_vectors *v, const char *c, t_str_list **tmp_map)
 	aux_e->next = element;
 }
 
-
 void		ft_parse_line(t_vectors *v, const char *c, t_str_list **tmp_map,
 	int *flag_map)
 {
-	//ft_check_config(v, c);
 	if (ft_chars_in_str("012NSWE", c))
 	{
 		*flag_map = 1;

@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 19:50:07 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:37:09 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_set_orientation(t_vectors *v, char c)
 		v->orientation = E;
 }
 
-void	ft_load_player_position(t_vectors *v)
+void		ft_load_player_position(t_vectors *v)
 {
 	int	x;
 	int y;
@@ -37,14 +37,14 @@ void	ft_load_player_position(t_vectors *v)
 	{
 		while (x < v->map_width)
 		{
-			if (ft_strchr("NSWE",v->map[y][x++]))
+			if (ft_strchr("NSWE", v->map[y][x++]))
 			{
 				ft_set_orientation(v, v->map[y][x - 1]);
 				v->pos_x = x - 0.5;
 				v->pos_y = y + 0.5;
 			}
 		}
-		x = 0; 
+		x = 0;
 		y++;
 	}
 	if (v->orientation < 0)

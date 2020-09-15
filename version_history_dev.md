@@ -1,10 +1,13 @@
 # Changelog - Dev Branch
 
+### v0.4
+* *Restructured* entire codebase to be *more organised* and entirely norminette-compliant. 
+
 ### v0.36
 * Restructured code layout into folders for clarity. Started initial norminette compliance. Raycasting function broken down for norminette compliance (compliance incomplete as of yet).
-* Added flood-fill algorythm to check map-leaks (ft_cub_settings_map_floodcheck).
-* Added 2 lines in ft_getmapstr() (ft_cub_settings_map_reading.c) to detect illegal characters in map. 
-* Now spawn at centre of a coordinate (visually displeasing when there's a wall).
+* Added flood-fill algorythm to check map-leaks (*ft_cub_settings_map_floodcheck()).
+* Added 2 lines in *ft_getmapstr()* (*ft_cub_settings_map_reading.c*) to detect illegal characters in map. 
+* Now spawn at centre of a coordinate (before fix it was visually displeasing when there was a wall right in front of spawn).
 * Map error-proofing seems to be complete at this stage (further testing required to confirm this).
 * Fixed a bug that would occasionally cause the second line of the map to be appended to the first line (whilst still being represented in the second line). This bug had the potential to cause segfaults as malloc'ed heap memory was smaller than copied string (when this bug occurred).
 * Fixed getting stuck when strafing sideways into a wall.

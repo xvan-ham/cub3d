@@ -6,20 +6,9 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 19:35:01 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:44:34 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** Function: static char *ft_parsebuffer(char *str, char **residual)
-** Function parses string, looking for character '\n'.
-** If character '\n' is found, characters up to '\n' are copied to a new string
-** and returned; characters beyond '\n' (if within array bounds) are copied to
-** a new ** residual string and 'residual' is made to point to it, freeing
-** previous (residual) string.
-** If there are no characters beyond '\n', 'residual' points to an empty string.
-** If no '\n' is found in 'str', function returns a NULL pointer.
-*/
 
 #include <cub3d.h>
 
@@ -39,7 +28,18 @@ static size_t	ft_strlen_delim(const char *s, char delim)
 	return (len);
 }
 
-static char	*ft_parsebuffer(char *str, char **residual)
+/*
+** Function: static char *ft_parsebuffer(char *str, char **residual)
+** Function parses string, looking for character '\n'.
+** If character '\n' is found, characters up to '\n' are copied to a new string
+** and returned; characters beyond '\n' (if within array bounds) are copied to
+** a new ** residual string and 'residual' is made to point to it, freeing
+** previous (residual) string.
+** If there are no characters beyond '\n', 'residual' points to an empty string.
+** If no '\n' is found in 'str', function returns a NULL pointer.
+*/
+
+static char		*ft_parsebuffer(char *str, char **residual)
 {
 	char *newstr;
 
@@ -79,7 +79,7 @@ static char	*ft_parsebuffer(char *str, char **residual)
 ** 'residual' points to an empty string.
 */
 
-int			ft_get_next_line(int fd, char **line)
+int				ft_get_next_line(int fd, char **line)
 {
 	static char	*residual;
 	char		buffer[BUFFER_SIZE + 1];

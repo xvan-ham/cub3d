@@ -6,44 +6,51 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:16:15 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/14 19:25:52 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:28:44 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	ft_print_map(t_vectors *v, char **map)
+void		ft_print_map(t_vectors *v, char **map)
 {
+	int r;
+	int c;
+	int x;
+	int y;
+
 	if (!v || !map)
 		ft_error("null pointer passed to ft_print_map");
-	int r, c, i, j;
 	r = v->map_height;
 	c = v->map_width;
-    for (i = 0; i <  r; i++) 
-    {
-		for (j = 0; j < c; j++) 
-         printf("%c ", map[i][j]);
-        printf("\n");
+	y = 0;
+	while (y < v->map_height)
+	{
+		x = 0;
+		while (x < v->map_width)
+			write(1, &map[y][x++], 1);
+		write(1, "\n", 1);
+		y++;
 	}
 }
 
 static void	ft_create_matrix(t_vectors *v)
 {
-	int	i;
-	int	j;
-  
-    char **map = (char **)malloc(v->map_height * sizeof(char *)); 
+	int		i;
+	int		j;
+	char	**map;
+
+	map = (char **)malloc(v->map_height * sizeof(char *));
 	i = 0;
 	while (i < v->map_height)
-         map[i++] = (char *)malloc(v->map_width * sizeof(char)); 
-    // Note that arr[i][j] is same as *(*(arr+i)+j)
-	i = 0; 
+		map[i++] = (char *)malloc(v->map_width * sizeof(char));
+	i = 0;
 	j = 0;
 	while (i < v->map_height)
 	{
 		while (j < v->map_width)
-        	map[i][j++] = 'X';  // OR *(*(arr+i)+j) = ++count
-		j = 0; 
+			map[i][j++] = 'X';
+		j = 0;
 		i++;
 	}
 	ft_print_map(v, map);
@@ -55,7 +62,7 @@ static void	ft_copy_map(t_vectors *v, t_str_list *tmp_map)
 	int	i;
 	int	j;
 
-	i = 0; 
+	i = 0;
 	j = 0;
 	while (i < v->map_height)
 	{
@@ -64,19 +71,18 @@ static void	ft_copy_map(t_vectors *v, t_str_list *tmp_map)
 			if (!(ft_str_list_get_element(tmp_map, i)->str)[j])
 				break ;
 			if ((ft_str_list_get_element(tmp_map, i)->str)[j] != ' ')
-        		v->map[i][j] = (ft_str_list_get_element(tmp_map, i)->str)[j];  // OR *(*(arr+i)+j) = ++count
+				v->map[i][j] = (ft_str_list_get_element(tmp_map, i)->str)[j];
 			j++;
 		}
-		j = 0; 
+		j = 0;
 		i++;
 	}
 }
 
-void	ft_create_map(t_vectors *v, t_str_list *tmp_map)
+void		ft_create_map(t_vectors *v, t_str_list *tmp_map)
 {
 	ft_create_matrix(v);
 	ft_copy_map(v, tmp_map);
 	printf("\n\n");
 	ft_print_map(v, v->map);
-
 }
