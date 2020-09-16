@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:28:51 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:47:41 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:25:09 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	ft_init_1(t_vectors *v)
 	v->flag_key_d_down = 0;
 	v->flag_key_left_down = 0;
 	v->flag_key_right_down = 0;
+	v->flag_sprite = 0;
 	v->orientation = -1;
 	v->fov = 0.66;
 	v->map_height = 0;
@@ -71,20 +72,26 @@ static void	ft_init_2(t_vectors *v)
 
 void		ft_vectors_initialise(t_vectors *v)
 {
+	int	i;
+
+	i = 0;
 	if (!v)
 		ft_error("received null pointer: ft_vectors_initialise");
-	printf("ft_vectors_initialise_s\n");
 	ft_init_1(v);
 	ft_init_2(v);
 	v->wall_x = 0;
-	v->flag_sprites = 0;
+	v->flag_sprite = 0;
 	if (!(v->sky = (t_color *)malloc(sizeof(t_color))))
 		ft_error("Not enough memory for sky color (malloc)");
 	if (!(v->floor = (t_color *)malloc(sizeof(t_color))))
 		ft_error("Not enough memory for floor color (malloc)");
 	if (!(v->textures = (t_texture **)malloc(4 * sizeof(t_texture *))))
 		ft_error("Not enough memory for texture array (malloc)");
-	if (!(v->tex_files = (char **)malloc(sizeof(char *) * 4)))
+	if (!(v->tex_files = (char **)malloc(sizeof(char *) * 5)))
 		ft_error("Not enough memory for tex_files (strings) array (malloc)");
-	printf("ft_vectors_initialise_e\n");
+	else
+	{
+		while (i < 5)
+			v->tex_files[i++] = 0;
+	}
 }

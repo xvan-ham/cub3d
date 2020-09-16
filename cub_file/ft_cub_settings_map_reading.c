@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 19:17:43 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/16 17:31:48 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		ft_add_to_tmp_map(t_vectors *v, const char *c, t_str_list **tmp_map)
 	if (element->str)
 		free(element->str);
 	element->str = ft_getmapstr(c);
+	if (ft_strchr(element->str, '2'))
+		v->flag_sprite = 1;
 	if (!*tmp_map)
 	{
 		*tmp_map = element;

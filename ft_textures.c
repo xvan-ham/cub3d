@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:10:34 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 19:20:44 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:43:14 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,16 @@ void	ft_load_tex_files(t_vectors *v)
 {
 	if (!v)
 		ft_error("received null pointer: ft_load_tex_files");
-	v->tex_files[0] = ft_strdup("./Textures/brick_4.xpm");
-	v->tex_files[1] = ft_strdup("./Textures/brick_1.xpm");
-	v->tex_files[2] = ft_strdup("./Textures/brick_2.xpm");
-	v->tex_files[3] = ft_strdup("./Textures/brick_3.xpm");
+	if (v->tex_files[0] == 0)
+		v->tex_files[0] = ft_strdup("./Textures/brick_4.xpm");
+	if (v->tex_files[1] == 0)
+		v->tex_files[1] = ft_strdup("./Textures/brick_1.xpm");
+	if (v->tex_files[2] == 0)
+		v->tex_files[2] = ft_strdup("./Textures/brick_2.xpm");
+	if (v->tex_files[3] == 0)
+		v->tex_files[3] = ft_strdup("./Textures/brick_3.xpm");
+	if (v->tex_files[4] == 0 && v->flag_sprite)
+		v->tex_files[4] = ft_strdup("./Textures/barrel.xpm");
 }
 
 void	ft_load_textures(t_vectors *v)
@@ -50,7 +56,7 @@ void	ft_load_textures(t_vectors *v)
 	if (!v)
 		ft_error("received null pointer: ft_load_textures");
 	ft_load_tex_files(v);
-	while (i < 4)
+	while (i < (v->flag_sprite ? 5 : 4))
 	{
 		if (!(tex = malloc(sizeof(t_texture))))
 			ft_error("Not enough memory for texture (malloc)");
@@ -63,8 +69,9 @@ void	ft_load_textures(t_vectors *v)
 			&(tex->img_endian))))
 			ft_error("Could not get data address from texture img pointer");
 		v->textures[i] = tex;
-		printf("Loaded texture: %s\n", v->tex_files[i]);
-		i++;
+		ft_putstr("Loaded ");
+		ft_putstr((v->flag_sprite && i == 4) ? "sprite: " : "texture: ");
+		ft_putstr(v->tex_files[i++]);
+		ft_putstr("\n");
 	}
-	printf("ft_load_textures_e\n");
 }

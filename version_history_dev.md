@@ -1,7 +1,20 @@
 # Changelog - Dev Branch
 
+### v0.5
+* Added _texture_ info processing in _.cub_ file, including error checking.
+* Added _sprite_ info processing in _.cub_ file, including error checking. Sprite will only be loaded if a sprite is present in the map.
+* Added _floor_ info processing in _.cub_ file, including error checking.
+* Added _ceiling_ info processing in _.cub_ file, including error checking.
+* Changed behavior of texture loading in _ft_textures.c_. Program will only load default texture files **if** no value is specified by the user in the _.cub_ file. This will prevent error in case user specifies a file location for a texture and changes or deletes the default texture in the _Textures_ folder.
+* Alphabetically ordered variables in *t_texture* (*struct s_texture*) definition in *cub3d.h*.
+* Alphabetically ordered variables in *t_vectors (*struct s_vectors*) definition in *cub3d.h*.
+* Alphabetically ordered function declarations in *cub3d.h*. 
+* Alphabetically ordered source files (_SRCS_) in *Makefile*.
+* Current build is completely norminette compliant. 
+
 ### v0.45
 * Added _resolution_ info processing in _.cub_ file. Performs data validation on the line and checks min max limits of given resolution, adjusting each dimention to the closest allowed value. For instance a resolution width above the established maximum resoution width will adjust the width to the allowed maximum after a console message.
+* Included _Textures_ folder into git repository.
 
 ### v0.4
 * *Restructured* entire codebase to be *more organised* and entirely norminette-compliant. 
