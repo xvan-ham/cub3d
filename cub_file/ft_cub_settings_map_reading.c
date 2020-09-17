@@ -6,11 +6,27 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/16 17:31:48 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/17 19:05:42 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+static int	ft_count_sprites(const char *s)
+{
+	int sprites;
+
+	sprites = 0;
+	if (!s)
+		return (0);
+	while (*s)
+	{
+		if (*s == '2')
+			sprites++;
+		s++;
+	}
+	return (sprites);
+}
 
 static char	*ft_getmapstr(const char *c)
 {
@@ -50,8 +66,7 @@ void		ft_add_to_tmp_map(t_vectors *v, const char *c, t_str_list **tmp_map)
 	if (element->str)
 		free(element->str);
 	element->str = ft_getmapstr(c);
-	if (ft_strchr(element->str, '2'))
-		v->flag_sprite = 1;
+	v->sprite_num += ft_count_sprites(element->str);
 	if (!*tmp_map)
 	{
 		*tmp_map = element;

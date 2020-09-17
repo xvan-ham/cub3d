@@ -1,5 +1,11 @@
 # Changelog - Dev Branch
 
+### v0.51
+* Added sprite related variables to main program structure (*t_vectors*).
+* Added new structure for sprites (*t_sprites*).
+* *ft_cub_settings_map_floodcheck.c* now also adds the sprites to the sprite array when the flooding encounters a sprite id on the map.
+* Working on sprite array sorting function.
+
 ### v0.5
 * Added _texture_ info processing in _.cub_ file, including error checking.
 * Added _sprite_ info processing in _.cub_ file, including error checking. Sprite will only be loaded if a sprite is present in the map.

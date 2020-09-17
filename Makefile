@@ -30,6 +30,8 @@ SRCS		=	main.c										\
 				ft_move.c									\
 				ft_move_utils.c								\
 				ft_raycasting.c								\
+				ft_raycasting_sprite.c						\
+				ft_sprite_funcs.c							\
 				ft_textures.c
 CC1			=	@gcc -I /usr/local/include -I .
 FL			=	-Wall -Wextra -Werror

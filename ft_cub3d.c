@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:09:03 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:23:00 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/17 20:26:35 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	ft_cub3d(void)
 	mlx_hook(v.win, 2, 0, ft_press_key, &v);
 	mlx_hook(v.win, 3, 0, ft_release_key, &v);
 	mlx_hook(v.win, 17, 0, ft_exit, &v);
+	printf("Total Sprites: <%d>\n", v.sprite_num);
 	printf("ft_cub3d: loaded hooks, drawing frame\n");
 	ft_raycasting(&v);
 	printf("ft_cub3d: drawn frame, starting loop hook\n");

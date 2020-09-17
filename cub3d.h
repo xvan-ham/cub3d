@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/16 19:49:59 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/17 20:25:59 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,16 @@ typedef struct			s_color
 	unsigned char		b;
 }						t_color;
 
+typedef struct			s_sprite
+{
+	double				x;
+	double				y;
+}						t_sprite;
+
+
 typedef struct			s_vectors
 {
+	double				*wall_dist;
 	char				**map;
 	char				**tex_files;
 	char				*img_ptr;
@@ -107,7 +115,6 @@ typedef struct			s_vectors
 	int					flag_key_right_down;
 	int					flag_key_s_down;
 	int					flag_key_w_down;
-	int					flag_sprite;
 	int					hit;
 	int					img_bpp;
 	int					img_endian;
@@ -118,6 +125,10 @@ typedef struct			s_vectors
 	int					map_y;
 	int					orientation;
 	int					side;
+	t_sprite			**sprites;
+	int					sprite_num;
+	int					*sprite_order;
+	double				*sprite_dist;
 	int					step_x;
 	int					step_y;
 	int					tex_x;
@@ -174,6 +185,7 @@ void					ft_floodcheck(t_vectors *v, int pos_x, int pos_y);
 void					ft_load_player_position(t_vectors *v);
 void					ft_load_tex_files(t_vectors *v);
 void					ft_load_textures(t_vectors *v);
+t_sprite				*ft_new_sprite(int x, int y);
 void					ft_mlx_start(t_vectors *v);
 void					ft_parse_line(t_vectors *v, const char *c,
 					t_str_list **tmp_map, int *flag_map);
@@ -183,6 +195,7 @@ void					ft_process_cub_file(t_vectors *v);
 void					ft_putstr(const char *s);
 void					ft_raycaster_defaults(t_vectors *v);
 void					ft_raycasting(t_vectors *v);
+void					ft_raycasting_sprite(t_vectors *v);
 void					ft_set_orientation_params(t_vectors *v);
 void					ft_str_list_delete(t_str_list *element);
 void					ft_vectors_initialise(t_vectors *v);

@@ -6,13 +6,39 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:34:49 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:57:23 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/17 20:29:43 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	ft_process_cub_file(t_vectors *v)
+static void	ft_error_check(t_vectors *v, int n)
+{
+	if (n < 0)
+		ft_error("ft_get_next_line returned an error in ft_process_cub_file");
+	if (!(v->wall_dist = malloc(v->screen_w * sizeof(double))))
+		ft_error("Not enough memory for double array <wall_dist> (malloc)");
+}
+
+static void	ft_allocate_sprite_arrays(t_vectors *v)
+{
+	int	i;
+
+	i = 0;
+	if (v->sprite_num > 0)
+	{
+		if (!(v->sprite_order = malloc(v->sprite_num * sizeof(int))))
+			ft_error("Not enough memory for int array <sprite_order> (malloc)");
+		if (!(v->sprite_dist = malloc(v->sprite_num * sizeof(double))))
+			ft_error("Not enough memory for double array <sprite_distance> (malloc)");
+		if (!(v->sprites = malloc(v->sprite_num * sizeof(t_sprite *))))
+			ft_error("Not enough memory for sprite array (malloc)");
+		while (i < v->sprite_num)
+			v->sprites[i++] = 0;
+	}
+}
+
+void		ft_process_cub_file(t_vectors *v)
 {
 	char		*line;
 	t_str_list	*tmp_map;
@@ -29,14 +55,14 @@ void	ft_process_cub_file(t_vectors *v)
 		if (line)
 			ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
 	}
-	if (n < 0)
-		ft_error("ft_get_next_line returned an error in ft_process_cub_file");
+	ft_error_check(v, n);
 	ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
 	close(fd);
 	ft_print_tmp_map(tmp_map);
 	ft_check_map(v, tmp_map);
 	ft_create_map(v, tmp_map);
 	ft_load_player_position(v);
+	ft_allocate_sprite_arrays(v);
 	ft_floodcheck(v, v->pos_x, v->pos_y);
 	ft_str_list_delete(tmp_map);
 }

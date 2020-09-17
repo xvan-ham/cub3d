@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 20:01:16 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:25:15 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/17 17:51:28 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	ft_raycasting(t_vectors *v)
 		ft_init_param_calc(v, x);
 		ft_sec_param_calc(v, x);
 		ft_dda(v, x, &line_height);
+		v->wall_dist[x] = v->perp_wall_dist;
 		draw_start = -line_height / 2 + v->screen_h / 2;
 		if (draw_start < 0)
 			draw_start = 0;
@@ -123,7 +124,7 @@ void	ft_raycasting(t_vectors *v)
 		ft_draw_sky(v, x, draw_start);
 		ft_draw_floor(v, x, draw_end);
 		ft_draw_vert(v, draw_start, draw_end,
-			ft_set_draw_and_tex_params(v, x, line_height, draw_start));
+		ft_set_draw_and_tex_params(v, x, line_height, draw_start));
 		x++;
 	}
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);

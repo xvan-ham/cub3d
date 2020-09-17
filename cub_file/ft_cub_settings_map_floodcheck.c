@@ -6,11 +6,21 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:34:04 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 18:33:44 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/17 19:44:22 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+static void	ft_add_sprite(t_vectors *v, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (v->sprites[i] != 0)
+		i++;
+	v->sprites[i] = ft_new_sprite(x, y);
+}
 
 static void	ft_flood_refill(t_vectors *v, char **map, int x, int y)
 {
@@ -38,7 +48,10 @@ static void	ft_flood_fill(t_vectors *v, char **map, int x, int y)
 		if (!x || !y || x >= v->map_width - 1 || y >= v->map_height - 1)
 			ft_error("Map leak!");
 		if (map[y][x] == '2')
+		{
 			map[y][x] = 'Y';
+			ft_add_sprite(v, x, y);
+		}
 		else
 			map[y][x] = 'Z';
 		ft_flood_fill(v, map, x + 1, y);
