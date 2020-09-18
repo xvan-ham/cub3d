@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 20:01:16 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/17 17:51:28 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/18 20:14:09 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void	ft_dda(t_vectors *v, int x, int *line_height)
 			v->map_x += v->step_x;
 			v->side = 1;
 		}
-		if (v->map[v->map_y][v->map_x] > '0' && v->map[v->map_y][v->map_x]
-		<= '2')
+		if (v->map[v->map_y][v->map_x] == '1')
 			v->hit = 1;
 	}
 	if (v->side == 0)
@@ -124,7 +123,7 @@ void	ft_raycasting(t_vectors *v)
 		ft_draw_sky(v, x, draw_start);
 		ft_draw_floor(v, x, draw_end);
 		ft_draw_vert(v, draw_start, draw_end,
-		ft_set_draw_and_tex_params(v, x, line_height, draw_start));
+			ft_set_draw_and_tex_params(v, x, line_height, draw_start));
 		x++;
 	}
 	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);

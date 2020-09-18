@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:28:51 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/17 19:35:05 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/18 18:26:53 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	ft_init_1(t_vectors *v)
 	v->orientation = -1;
 	v->screen_h = 0;
 	v->screen_w = 0;
-	v->sprite_num = 0;
 	v->textures = 0;
 	v->wall_dist = 0;
 	v->win = 0;
@@ -81,6 +80,8 @@ void		ft_vectors_initialise(t_vectors *v)
 	ft_init_2(v);
 	v->wall_x = 0;
 	v->sprite_num = 0;
+	v->sprite_order = 0;
+	v->sprite_dist = 0;
 	v->sprites = 0;
 	if (!(v->sky = (t_color *)malloc(sizeof(t_color))))
 		ft_error("Not enough memory for sky color (malloc)");

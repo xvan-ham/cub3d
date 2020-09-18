@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 19:08:00 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/17 20:35:45 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/18 17:39:57 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int			ft_move(t_vectors *v)
 	flag_right(v, v->flag_key_right_down);
 	flag_left(v, v->flag_key_left_down);
 	ft_raycasting(v);
-	ft_raycasting_sprite(v);
+	if (v->sprite_num > 0)
+		ft_raycasting_sprite(v);
 	return (0);
 }

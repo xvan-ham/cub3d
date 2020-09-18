@@ -1,5 +1,9 @@
 # Changelog - Dev Branch
 
+### v0.52
+* Finished sprite-sorting algorithm.
+* Saving day's work: sprite-drawing function is _not_ currently functioning correctly.
+
 ### v0.51
 * Added sprite related variables to main program structure (*t_vectors*).
 * Added new structure for sprites (*t_sprites*).
