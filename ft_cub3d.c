@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:09:03 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/18 17:36:01 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/21 18:59:25 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 int		ft_exit(int key)
 {
 	ft_putstr("Exiting Cub3D program - Bye!\n");
+	key = 1; //adapt to free nec. files
 	exit(0);
 }
 
 void	ft_raycaster_defaults(t_vectors *v)
 {
-	t_texture **textures;
-
 	if (!v)
 		ft_error("received null pointer: ft_raycaster_defaults");
 	v->sky->r = 130;

@@ -1,5 +1,9 @@
 # Changelog - Dev Branch
 
+### v0.55
+* Now represents sprites correcly (not norminette compliant - still needs doing).
+* Fixed sprite bug (did not allocate enough memory to store the sprite texture pointer, producing undefined behavior).
+
 ### v0.52
 * Finished sprite-sorting algorithm.
 * Saving day's work: sprite-drawing function is _not_ currently functioning correctly.

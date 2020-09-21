@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:28:51 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/18 18:26:53 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/21 20:19:54 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		ft_vectors_initialise(t_vectors *v)
 		ft_error("Not enough memory for sky color (malloc)");
 	if (!(v->floor = (t_color *)malloc(sizeof(t_color))))
 		ft_error("Not enough memory for floor color (malloc)");
-	if (!(v->textures = (t_texture **)malloc(4 * sizeof(t_texture *))))
+	if (!(v->textures = malloc(5 * sizeof(t_texture *))))
 		ft_error("Not enough memory for texture array (malloc)");
 	if (!(v->tex_files = (char **)malloc(sizeof(char *) * 5)))
 		ft_error("Not enough memory for tex_files (strings) array (malloc)");

@@ -6,13 +6,13 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 20:01:16 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/18 20:14:09 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/21 20:42:34 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_init_param_calc(t_vectors *v, int x)
+static void	ft_init_param_calc(t_vectors *v, int x)
 {
 	if (!v)
 		ft_error("received null pointer: ft_raycasting");
@@ -26,7 +26,7 @@ void	ft_init_param_calc(t_vectors *v, int x)
 	v->hit = 0;
 }
 
-void	ft_sec_param_calc(t_vectors *v, int x)
+static void	ft_sec_param_calc(t_vectors *v)
 {
 	if (v->raydir_y < 0)
 	{
@@ -50,7 +50,7 @@ void	ft_sec_param_calc(t_vectors *v, int x)
 	}
 }
 
-void	ft_dda(t_vectors *v, int x, int *line_height)
+static void	ft_dda(t_vectors *v, int *line_height)
 {
 	while (v->hit == 0)
 	{
@@ -78,7 +78,7 @@ void	ft_dda(t_vectors *v, int x, int *line_height)
 	*line_height = (int)(v->screen_h / v->perp_wall_dist);
 }
 
-int		ft_set_draw_and_tex_params(t_vectors *v, int x, int line_height,
+static int	ft_set_draw_and_tex_params(t_vectors *v, int line_height,
 									int draw_start)
 {
 	int		tex_num;
@@ -99,7 +99,7 @@ int		ft_set_draw_and_tex_params(t_vectors *v, int x, int line_height,
 	return (tex_num);
 }
 
-void	ft_raycasting(t_vectors *v)
+void		ft_raycasting(t_vectors *v)
 {
 	int		x;
 	int		line_height;
@@ -111,8 +111,8 @@ void	ft_raycasting(t_vectors *v)
 	{
 		v->x = x;
 		ft_init_param_calc(v, x);
-		ft_sec_param_calc(v, x);
-		ft_dda(v, x, &line_height);
+		ft_sec_param_calc(v);
+		ft_dda(v, &line_height);
 		v->wall_dist[x] = v->perp_wall_dist;
 		draw_start = -line_height / 2 + v->screen_h / 2;
 		if (draw_start < 0)
@@ -123,8 +123,7 @@ void	ft_raycasting(t_vectors *v)
 		ft_draw_sky(v, x, draw_start);
 		ft_draw_floor(v, x, draw_end);
 		ft_draw_vert(v, draw_start, draw_end,
-			ft_set_draw_and_tex_params(v, x, line_height, draw_start));
+			ft_set_draw_and_tex_params(v, line_height, draw_start));
 		x++;
 	}
-	mlx_put_image_to_window(v->mlx, v->win, v->img, 0, 0);
 }

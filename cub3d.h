@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/17 20:25:59 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/21 20:39:16 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct			s_sprite
 	double				x;
 	double				y;
 }						t_sprite;
-
 
 typedef struct			s_vectors
 {
@@ -195,7 +194,7 @@ void					ft_process_cub_file(t_vectors *v);
 void					ft_putstr(const char *s);
 void					ft_raycaster_defaults(t_vectors *v);
 void					ft_raycasting(t_vectors *v);
-void					ft_raycasting_sprite(t_vectors *v);
+void					ft_raycasting_sprite(t_vectors *v, int tex_num);
 void					ft_set_orientation_params(t_vectors *v);
 void					ft_str_list_delete(t_str_list *element);
 void					ft_vectors_initialise(t_vectors *v);

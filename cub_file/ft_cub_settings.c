@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:34:49 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/17 20:29:43 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/21 20:41:03 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_allocate_sprite_arrays(t_vectors *v)
 		if (!(v->sprite_order = malloc(v->sprite_num * sizeof(int))))
 			ft_error("Not enough memory for int array <sprite_order> (malloc)");
 		if (!(v->sprite_dist = malloc(v->sprite_num * sizeof(double))))
-			ft_error("Not enough memory for double array <sprite_distance> (malloc)");
+			ft_error("Not enough mem. for malloc of <sprite_distance>");
 		if (!(v->sprites = malloc(v->sprite_num * sizeof(t_sprite *))))
 			ft_error("Not enough memory for sprite array (malloc)");
 		while (i < v->sprite_num)

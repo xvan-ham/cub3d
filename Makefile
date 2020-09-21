@@ -38,7 +38,7 @@ CC2			=	-L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -g
 OBJS		=	$(SRCS:.c=.o)
 
 all     :   $(SRCS) $(HEADER)
-				$(CC1) $(SRCS) $(CC2)
+				$(CC1) $(SRCS) $(CC2) $(FL)
 test    :
 				@gcc -o testMiniLibx -I minilibx -L minilibx -lmlx -framework OpenGL -framework AppKit *.c
 ccleaner:

@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 16:52:48 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:01:09 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/21 18:59:46 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_color_pixel(char *s, char *s_tex)
 
 void	ft_draw_vert(t_vectors *v, int draw_start, int draw_end, int tex_n)
 {
-	int			aux;
 	char		*s;
 	char		*s_tex;
 	t_texture	*t;
@@ -40,6 +39,8 @@ void	ft_draw_vert(t_vectors *v, int draw_start, int draw_end, int tex_n)
 	if (!v)
 		ft_error("received null pointer: ft_draw_vert");
 	x = v->x;
+	if (tex_n == 4)
+		printf("sprite with t_texture address: %p\n", v->textures[4]); //remove when done debugging
 	t = v->textures[tex_n];
 	s_tex = t->img_ptr + (4 * v->tex_y);
 	s = v->img_ptr + (x * 4) + (v->img_line_size * draw_start);
