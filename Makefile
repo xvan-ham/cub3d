@@ -17,6 +17,7 @@ SRCS		=	main.c										\
 				./utils/ft_error.c							\
 				./utils/ft_get_next_line.c					\
 				./utils/ft_get_next_line_utils.c			\
+				./utils/ft_print_cond.c						\
 				./utils/ft_putnbr.c							\
 				./utils/ft_putstr.c							\
 				./utils/ft_str_list_functions.c				\
@@ -31,6 +32,7 @@ SRCS		=	main.c										\
 				ft_raycasting.c								\
 				ft_raycasting_sprite.c						\
 				ft_sprite_funcs.c							\
+				ft_sprites_sort.c							\
 				ft_textures.c
 CC1			=	@gcc -I /usr/local/include -I .
 FL			=	-Wall -Wextra -Werror

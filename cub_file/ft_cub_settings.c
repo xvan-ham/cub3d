@@ -6,11 +6,17 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:34:49 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/21 20:41:03 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 19:08:03 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+static void	ft_check_print(int flag, t_str_list *tmp_map)
+{
+	if (flag)
+		ft_print_tmp_map(tmp_map);
+}
 
 static void	ft_error_check(t_vectors *v, int n)
 {
@@ -58,7 +64,7 @@ void		ft_process_cub_file(t_vectors *v)
 	ft_error_check(v, n);
 	ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
 	close(fd);
-	ft_print_tmp_map(tmp_map);
+	ft_check_print(PRINT_MAPS, tmp_map);
 	ft_check_map(v, tmp_map);
 	ft_create_map(v, tmp_map);
 	ft_load_player_position(v);

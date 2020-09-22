@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/17 19:05:42 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 18:57:35 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*ft_getmapstr(const char *c)
 		*(str++) = *(c++);
 	}
 	*str = 0;
-	printf("<%s>\n", (char *)aux);
+	ft_print_cond((char *)aux, PRINT_MAPS);
 	return ((char *)aux);
 }
 
@@ -80,10 +80,15 @@ void		ft_add_to_tmp_map(t_vectors *v, const char *c, t_str_list **tmp_map)
 
 void		ft_print_tmp_map(t_str_list *tmp_map)
 {
+	ft_putstr("\n");
 	while (tmp_map && tmp_map->next)
 	{
-		printf("struct str: <%s>\n", tmp_map->str);
+		ft_putstr("struct str: "); 
+		ft_putstr(tmp_map->str);
+		ft_putstr("\n");
 		tmp_map = tmp_map->next;
 	}
-	printf("struct str: <%s>\n", tmp_map->str);
+	ft_putstr("struct str: "); 
+	ft_putstr(tmp_map->str);
+	ft_putstr("\n");
 }

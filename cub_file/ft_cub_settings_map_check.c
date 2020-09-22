@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:35:23 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/21 19:03:40 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 18:57:35 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,4 @@ void		ft_check_map(t_vectors *v, t_str_list *tmp_map)
 		ft_error("received null pointer: ft_check_map");
 	v->map_height = ft_get_map_height(v, tmp_map);
 	v->map_width = ft_get_map_width(v, tmp_map);
-	printf("Height: %d, Width: %d\n", v->map_height, v->map_width);
 }

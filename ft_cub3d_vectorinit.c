@@ -6,13 +6,13 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:28:51 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/21 20:19:54 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 18:25:29 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_init_1(t_vectors *v)
+static void		ft_init_1(t_vectors *v)
 {
 	v->flag_key_a_down = 0;
 	v->flag_key_d_down = 0;
@@ -40,7 +40,7 @@ static void	ft_init_1(t_vectors *v)
 	v->win = 0;
 }
 
-static void	ft_init_2(t_vectors *v)
+static void		ft_init_2(t_vectors *v)
 {
 	v->camera_y = 0;
 	v->delta_dist_x = 0;
@@ -69,7 +69,40 @@ static void	ft_init_2(t_vectors *v)
 	v->wall_y = 0;
 }
 
-void		ft_vectors_initialise(t_vectors *v)
+static void		ft_init_3(t_vectors *v)
+{
+	v->wall_x = 0;
+	v->sprite_num = 0;
+	v->sprite_order = 0;
+	v->sprite_dist = 0;
+	v->sprite_info = 0;
+	v->sprites = 0;
+}
+
+t_sprite_info	*ft_sprite_info_init(void)
+{
+	t_sprite_info	*s;
+
+	if (!(s = malloc(sizeof(t_sprite_info))))
+		ft_error("Not enough mem for t_sprite_info (malloc)");
+	s->transform_x = 0;
+	s->transform_y = 0;
+	s->sprite_screen_x = 0;
+	s->sprite_height = 0;
+	s->draw_start_y = 0;
+	s->draw_end_y = 0;
+	s->sprite_width = 0;
+	s->draw_start_x = 0;
+	s->draw_end_x = 0;
+	s->tex_x = 0;
+	s->tex_y = 0;
+	s->y = 0;
+	s->stripe = 0;
+	s->i = 0;
+	return (s);
+}
+
+void			ft_vectors_initialise(t_vectors *v)
 {
 	int	i;
 
@@ -78,11 +111,7 @@ void		ft_vectors_initialise(t_vectors *v)
 		ft_error("received null pointer: ft_vectors_initialise");
 	ft_init_1(v);
 	ft_init_2(v);
-	v->wall_x = 0;
-	v->sprite_num = 0;
-	v->sprite_order = 0;
-	v->sprite_dist = 0;
-	v->sprites = 0;
+	ft_init_3(v);
 	if (!(v->sky = (t_color *)malloc(sizeof(t_color))))
 		ft_error("Not enough memory for sky color (malloc)");
 	if (!(v->floor = (t_color *)malloc(sizeof(t_color))))

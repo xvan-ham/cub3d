@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:15:47 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/21 20:35:22 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 20:12:28 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,5 @@ void		ft_parse_line(t_vectors *v, const char *s, t_str_list **tmp_map,
 	}
 	free((void *)s);
 	if (*flag_map)
-	{
 		ft_error("Invalid map, don't add empty lines to map!!");
-		free((void *)s);
-	}
 }

@@ -1,4 +1,9 @@
 # Changelog - Dev Branch
+### v0.6
+* Cleaned/restructured source code for norminette compliance (added *ft_sprites_sort.c*).
+* Fixed memory when freeing *get_next_line* lines.
+#### Known Issues:
+* There is still a memory leak [16], have not traced down the source as of yet.
 
 ### v0.55
 * Now represents sprites correcly (not norminette compliant - still needs doing).

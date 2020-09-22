@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/21 20:39:16 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 19:15:25 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,31 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+# define PRINT_MAPS 0
+# define VERBOSE 0
 # define BUFFER_SIZE 5
-# define N 0
-# define E 1
-# define W 2
-# define S 3
-# define SW 1500
-# define SH 1000
-# define SCREEN_WIDTH_LL 100
-# define SCREEN_WIDTH_UL 3072
-# define SCREEN_HEIGHT_LL 100
-# define SCREEN_HEIGHT_UL 1920
-# define WIN_NAME "Cub3D"
-# define PARAM_MOV_SPEED 0.03
-# define PARAM_ROT_SPEED 0.04
-# define KEY_W 13
 # define KEY_A 0
-# define KEY_S 1
 # define KEY_D 2
-# define KEY_UP 126
 # define KEY_DOWN 125
+# define KEY_ESC 53
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
-# define KEY_ESC 53
+# define KEY_S 1
+# define KEY_UP 126
+# define KEY_W 13
+# define E 1
+# define N 0
+# define S 3
+# define W 2
+# define PARAM_MOV_SPEED 0.03
+# define PARAM_ROT_SPEED 0.04
+# define SCREEN_HEIGHT_LL 100
+# define SCREEN_HEIGHT_UL 1920
+# define SCREEN_WIDTH_LL 100
+# define SCREEN_WIDTH_UL 3072
+# define SH 1000
+# define SW 1500
+# define WIN_NAME "Cub3D"
 
 typedef struct			s_str_list
 {
@@ -78,6 +80,24 @@ typedef struct			s_sprite
 	double				x;
 	double				y;
 }						t_sprite;
+
+typedef struct			s_sprite_info
+{
+	double				transform_x;
+	double				transform_y;
+	int					sprite_screen_x;
+	int					sprite_height;
+	int					draw_start_y;
+	int					draw_end_y;
+	int					sprite_width;
+	int					draw_start_x;
+	int					draw_end_x;
+	int					tex_x;
+	int					tex_y;
+	int					y;
+	int					stripe;
+	int					i;
+}						t_sprite_info;
 
 typedef struct			s_vectors
 {
@@ -125,6 +145,7 @@ typedef struct			s_vectors
 	int					orientation;
 	int					side;
 	t_sprite			**sprites;
+	t_sprite_info		*sprite_info;
 	int					sprite_num;
 	int					*sprite_order;
 	double				*sprite_dist;
@@ -186,8 +207,10 @@ void					ft_load_tex_files(t_vectors *v);
 void					ft_load_textures(t_vectors *v);
 t_sprite				*ft_new_sprite(int x, int y);
 void					ft_mlx_start(t_vectors *v);
+void					ft_order_sprites(t_vectors *v);
 void					ft_parse_line(t_vectors *v, const char *c,
 					t_str_list **tmp_map, int *flag_map);
+void					ft_print_cond(const char *s, int flag);
 void					ft_print_map(t_vectors *v, char **map);
 void					ft_print_tmp_map(t_str_list *tmp_map);
 void					ft_process_cub_file(t_vectors *v);
@@ -196,6 +219,7 @@ void					ft_raycaster_defaults(t_vectors *v);
 void					ft_raycasting(t_vectors *v);
 void					ft_raycasting_sprite(t_vectors *v, int tex_num);
 void					ft_set_orientation_params(t_vectors *v);
+t_sprite_info			*ft_sprite_info_init(void);
 void					ft_str_list_delete(t_str_list *element);
 void					ft_vectors_initialise(t_vectors *v);
 

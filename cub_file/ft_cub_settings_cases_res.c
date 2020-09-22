@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cub_settings_cases.c                            :+:      :+:    :+:   */
+/*   ft_cub_settings_cases_res.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:23:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/16 16:46:11 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 20:20:02 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ static void	ft_sort_res_cases(t_vectors *v, int width, int height)
 {
 	if (height > SCREEN_HEIGHT_UL)
 	{
-		ft_putstr("Screen height res too low, using minimum val\n");
+		ft_putstr("Screen height res too high, using max val\n");
 		v->screen_h = SCREEN_HEIGHT_UL;
 	}
 	if (height < SCREEN_HEIGHT_LL)
 	{
-		ft_putstr("Screen height res too high, using max val\n");
 		v->screen_h = SCREEN_HEIGHT_LL;
+		ft_putstr("Screen height res too low, using minimum val\n");
 	}
 	if (width > SCREEN_WIDTH_UL)
 	{
-		ft_putstr("Screen height res too low, using minimum val\n");
+		ft_putstr("Screen height res too high, using max val\n");
 		v->screen_w = SCREEN_WIDTH_UL;
 	}
 	if (width < SCREEN_WIDTH_LL)
 	{
-		ft_putstr("Screen height res too high, using max val\n");
+		ft_putstr("Screen height res too low, using minimum val\n");
 		v->screen_w = SCREEN_WIDTH_LL;
 	}
 }

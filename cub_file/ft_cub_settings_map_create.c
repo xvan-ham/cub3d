@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:16:15 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 18:28:44 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 19:14:09 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ static void	ft_create_matrix(t_vectors *v)
 		j = 0;
 		i++;
 	}
-	ft_print_map(v, map);
+	if (PRINT_MAPS)
+	{
+		write(1, "\n", 1);
+		ft_print_map(v, map);
+	}
 	v->map = map;
 }
 
@@ -83,6 +87,9 @@ void		ft_create_map(t_vectors *v, t_str_list *tmp_map)
 {
 	ft_create_matrix(v);
 	ft_copy_map(v, tmp_map);
-	printf("\n\n");
-	ft_print_map(v, v->map);
+	if (PRINT_MAPS)
+	{
+		ft_putstr("\n");
+		ft_print_map(v, v->map);
+	}
 }

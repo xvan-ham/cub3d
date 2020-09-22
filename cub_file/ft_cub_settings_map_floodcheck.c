@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:34:04 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/17 19:44:22 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/22 19:14:51 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,16 @@ static void	ft_flood_fill(t_vectors *v, char **map, int x, int y)
 void		ft_floodcheck(t_vectors *v, int pos_x, int pos_y)
 {
 	ft_flood_fill(v, v->map, pos_x, pos_y);
-	write(1, "\n", 1);
-	ft_print_map(v, v->map);
-	write(1, "\n", 1);
+	if (PRINT_MAPS)
+	{
+		write(1, "\n", 1);
+		ft_print_map(v, v->map);
+		write(1, "\n", 1);
+	}
 	ft_flood_refill(v, v->map, pos_x, pos_y);
-	ft_print_map(v, v->map);
+	if (PRINT_MAPS)
+	{
+		ft_print_map(v, v->map);
+		write(1, "\n", 1);
+	}
 }
