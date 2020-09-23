@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:09:03 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/22 19:11:30 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/23 20:34:30 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_mlx_start(t_vectors *v)
 	ft_vectors_initialise(v);
 	ft_raycaster_defaults(v);
 	ft_process_cub_file(v);
-	if (v->sprite_num > 0)
+	if ((v->sprite_num) >= 1)
 		v->sprite_info = ft_sprite_info_init();
 	ft_set_orientation_params(v);
 	v->mlx = mlx_init();

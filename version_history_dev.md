@@ -1,7 +1,12 @@
 # Changelog - Dev Branch
+
+### v0.65
+* Fixed all runtime memory leaks.
+
 ### v0.6
 * Cleaned/restructured source code for norminette compliance (added *ft_sprites_sort.c*).
 * Fixed memory when freeing *get_next_line* lines.
+* Added 2 constants to *ft_cub3d.h*: _VERBOSE_; *PRINT_MAPS*. If these are changed from _0_ to _1_, they will print extra program info during runtime and all the intermediary maps in case of the latter.
 #### Known Issues:
 * There is still a memory leak [16], have not traced down the source as of yet.
 
