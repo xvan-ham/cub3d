@@ -31,6 +31,7 @@ SRCS		=	main.c										\
 				ft_move_utils.c								\
 				ft_raycasting.c								\
 				ft_raycasting_sprite.c						\
+				ft_screenshot.c								\
 				ft_sprite_funcs.c							\
 				ft_sprites_sort.c							\
 				ft_textures.c

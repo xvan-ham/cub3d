@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:09:03 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/23 20:34:30 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/24 20:27:49 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ft_exit(int key)
 {
 	ft_putstr("Exiting Cub3D program - Bye!\n");
-	key = 1; //adapt to free nec. files
+	key = 1;
 	exit(0);
 }
 
@@ -36,14 +36,14 @@ void	ft_raycaster_defaults(t_vectors *v)
 	ft_print_cond("> Loaded defaults", VERBOSE);
 }
 
-void	ft_mlx_start(t_vectors *v)
+void	ft_mlx_start(t_vectors *v, const char *cub_file)
 {
 	if (!v)
 		ft_error("received null pointer: ft_mlx_start");
 	ft_print_cond("> ft_mlx_start", VERBOSE);
 	ft_vectors_initialise(v);
 	ft_raycaster_defaults(v);
-	ft_process_cub_file(v);
+	ft_process_cub_file(v, cub_file);
 	if ((v->sprite_num) >= 1)
 		v->sprite_info = ft_sprite_info_init();
 	ft_set_orientation_params(v);
@@ -55,11 +55,11 @@ void	ft_mlx_start(t_vectors *v)
 	ft_print_cond("> Initiated: mlx, win, img", VERBOSE);
 }
 
-void	ft_cub3d(void)
+void	ft_cub3d(const char *cub_file, int save_flag)
 {
 	t_vectors v;
 
-	ft_mlx_start(&v);
+	ft_mlx_start(&v, cub_file);
 	ft_load_textures(&v);
 	ft_print_cond("> ft_cub3d: loading hooks", VERBOSE);
 	mlx_hook(v.win, 2, 0, ft_press_key, &v);
@@ -69,6 +69,8 @@ void	ft_cub3d(void)
 	ft_raycasting(&v);
 	if (v.sprite_num > 0)
 		ft_raycasting_sprite(&v, 4);
+	if (!save_bmp(&v))
+		ft_error("Screenshot error.");
 	mlx_loop_hook(v.mlx, ft_move, &v);
 	ft_print_cond("> ft_cub3d: drawn frame, starting mlx loop", VERBOSE);
 	mlx_loop(v.mlx);

@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:03:53 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 17:07:29 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/24 18:21:22 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int		ft_press_key(int key, void *param)
 		ft_error("received null pointer: ft_press_key");
 	if (key == KEY_ESC)
 	{
-		ft_putstr("\nPressed Esc, closing window - Bye! (FIX me)\n");
-		exit(0);
+		ft_exit(0);
 	}
 	if (key == KEY_W && !v->flag_key_w_down)
 		v->flag_key_w_down = 1;

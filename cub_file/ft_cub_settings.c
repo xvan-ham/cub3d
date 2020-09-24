@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:34:49 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/23 20:23:09 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/24 18:29:28 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,20 @@ static void	ft_allocate_sprite_arrays(t_vectors *v)
 	}
 }
 
-void		ft_process_cub_file(t_vectors *v)
+static void	ft_map_checks(t_vectors *v, t_str_list *tmp_map)
+{
+	if (!tmp_map)
+		ft_error("There is no map present in the cub file.");
+	ft_check_print(PRINT_MAPS, tmp_map);
+	ft_check_map(v, tmp_map);
+	ft_create_map(v, tmp_map);
+	ft_load_player_position(v);
+	ft_allocate_sprite_arrays(v);
+	ft_floodcheck(v, v->pos_x, v->pos_y);
+	ft_str_list_delete(tmp_map);
+}
+
+void		ft_process_cub_file(t_vectors *v, const char *cub_file)
 {
 	char		*line;
 	t_str_list	*tmp_map;
@@ -55,7 +68,9 @@ void		ft_process_cub_file(t_vectors *v)
 	flag_parsing_map = 0;
 	tmp_map = 0;
 	line = 0;
-	fd = open("settings.cub", O_RDONLY);
+	fd = open(cub_file, O_RDONLY);
+	if (fd == -1)
+		ft_error("Could not find the specified cub file.");
 	while ((n = ft_get_next_line(fd, &line)))
 	{
 		if (line)
@@ -64,11 +79,5 @@ void		ft_process_cub_file(t_vectors *v)
 	ft_error_check(v, n);
 	ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
 	close(fd);
-	ft_check_print(PRINT_MAPS, tmp_map);
-	ft_check_map(v, tmp_map);
-	ft_create_map(v, tmp_map);
-	ft_load_player_position(v);
-	ft_allocate_sprite_arrays(v);
-	ft_floodcheck(v, v->pos_x, v->pos_y);
-	ft_str_list_delete(tmp_map);
+	ft_map_checks(v, tmp_map);
 }

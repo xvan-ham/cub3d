@@ -1,5 +1,9 @@
 # Changelog - Dev Branch
 
+### v0.9
+* Note: saving day's work, is incomplete.
+* Added screenshot capability!
+
 ### v0.65
 * Fixed all runtime memory leaks.
 

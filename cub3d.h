@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/23 20:35:14 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/24 20:27:20 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ char					*ft_strdup(const char *s1);
 char					*ft_strjoin(char const *s1, char const *s2);
 char					*ft_strndup(const char *src, size_t chars);
 char					*ft_strstr(const char *s1, const char *s2);
+int						save_bmp(t_vectors *v);
 int						digits(int n);
 int						ft_atoi(const char *string);
 int						ft_choose_wall_texture(t_vectors *v);
@@ -195,7 +196,7 @@ void					ft_check_config(t_vectors *v, const char *c);
 void					ft_check_map(t_vectors *v, t_str_list *tmp_map);
 void					ft_color_pixel(char *s, char *s_tex);
 void					ft_create_map(t_vectors *v, t_str_list *tmp_map);
-void					ft_cub3d(void);
+void					ft_cub3d(const char *cub_file, int save_flag);
 void					ft_draw_floor(t_vectors *v, int x, int draw_end);
 void					ft_draw_sky(t_vectors *v, int x, int draw_start);
 void					ft_draw_vert(t_vectors *v, int draw_start, int draw_end,
@@ -206,14 +207,14 @@ void					ft_load_player_position(t_vectors *v);
 void					ft_load_tex_files(t_vectors *v);
 void					ft_load_textures(t_vectors *v);
 t_sprite				*ft_new_sprite(int x, int y);
-void					ft_mlx_start(t_vectors *v);
+void					ft_mlx_start(t_vectors *v, const char *cub_file);
 void					ft_order_sprites(t_vectors *v);
 void					ft_parse_line(t_vectors *v, const char *c,
 					t_str_list **tmp_map, int *flag_map);
 void					ft_print_cond(const char *s, int flag);
 void					ft_print_map(t_vectors *v, char **map);
 void					ft_print_tmp_map(t_str_list *tmp_map);
-void					ft_process_cub_file(t_vectors *v);
+void					ft_process_cub_file(t_vectors *v, const char *cub_file);
 void					ft_putstr(const char *s);
 void					ft_raycaster_defaults(t_vectors *v);
 void					ft_raycasting(t_vectors *v);
