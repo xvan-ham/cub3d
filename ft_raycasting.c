@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 20:01:16 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/21 20:42:34 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/25 18:33:40 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ static int	ft_set_draw_and_tex_params(t_vectors *v, int line_height,
 		v->tex_y = (v->textures[tex_num])->tex_w - v->tex_y - 1;
 	v->step = 1.0 * (v->textures[tex_num])->tex_h / line_height;
 	v->tex_pos = (draw_start - v->screen_h / 2 + line_height / 2) * v->step;
+	if (v->tex_pos < 0)
+		v->tex_pos = 0;
 	return (tex_num);
 }
 

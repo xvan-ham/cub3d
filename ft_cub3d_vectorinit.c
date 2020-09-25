@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:28:51 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/23 20:33:10 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/25 19:19:46 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void		ft_init_3(t_vectors *v)
 t_sprite_info	*ft_sprite_info_init(void)
 {
 	t_sprite_info	*s;
+
 	if (!(s = (t_sprite_info *)malloc(sizeof(t_sprite_info))))
 		ft_error("Not enough mem for t_sprite_info (malloc)");
 	s->transform_x = 0;

@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 16:13:02 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/24 20:27:20 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/25 19:18:21 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@
 # define N 0
 # define S 3
 # define W 2
-# define PARAM_MOV_SPEED 0.03
-# define PARAM_ROT_SPEED 0.04
+# define PARAM_MOV_SPEED 0.027
+# define PARAM_ROT_SPEED 0.036
 # define SCREEN_HEIGHT_LL 100
-# define SCREEN_HEIGHT_UL 1920
+# define SCREEN_HEIGHT_UL 1440
 # define SCREEN_WIDTH_LL 100
-# define SCREEN_WIDTH_UL 3072
+# define SCREEN_WIDTH_UL 2560
 # define SH 1000
 # define SW 1500
 # define WIN_NAME "Cub3D"
@@ -207,7 +207,6 @@ void					ft_load_player_position(t_vectors *v);
 void					ft_load_tex_files(t_vectors *v);
 void					ft_load_textures(t_vectors *v);
 t_sprite				*ft_new_sprite(int x, int y);
-void					ft_mlx_start(t_vectors *v, const char *cub_file);
 void					ft_order_sprites(t_vectors *v);
 void					ft_parse_line(t_vectors *v, const char *c,
 					t_str_list **tmp_map, int *flag_map);
@@ -216,7 +215,6 @@ void					ft_print_map(t_vectors *v, char **map);
 void					ft_print_tmp_map(t_str_list *tmp_map);
 void					ft_process_cub_file(t_vectors *v, const char *cub_file);
 void					ft_putstr(const char *s);
-void					ft_raycaster_defaults(t_vectors *v);
 void					ft_raycasting(t_vectors *v);
 void					ft_raycasting_sprite(t_vectors *v, int tex_num);
 void					ft_set_orientation_params(t_vectors *v);

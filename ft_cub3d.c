@@ -6,20 +6,20 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:09:03 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/24 20:27:49 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/25 19:19:23 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ft_exit(int key)
+int			ft_exit(int key)
 {
 	ft_putstr("Exiting Cub3D program - Bye!\n");
 	key = 1;
 	exit(0);
 }
 
-void	ft_raycaster_defaults(t_vectors *v)
+static void	ft_raycaster_defaults(t_vectors *v)
 {
 	if (!v)
 		ft_error("received null pointer: ft_raycaster_defaults");
@@ -36,7 +36,7 @@ void	ft_raycaster_defaults(t_vectors *v)
 	ft_print_cond("> Loaded defaults", VERBOSE);
 }
 
-void	ft_mlx_start(t_vectors *v, const char *cub_file)
+static void	ft_mlx_start(t_vectors *v, const char *cub_file)
 {
 	if (!v)
 		ft_error("received null pointer: ft_mlx_start");
@@ -55,7 +55,7 @@ void	ft_mlx_start(t_vectors *v, const char *cub_file)
 	ft_print_cond("> Initiated: mlx, win, img", VERBOSE);
 }
 
-void	ft_cub3d(const char *cub_file, int save_flag)
+void		ft_cub3d(const char *cub_file, int save_flag)
 {
 	t_vectors v;
 
@@ -69,8 +69,13 @@ void	ft_cub3d(const char *cub_file, int save_flag)
 	ft_raycasting(&v);
 	if (v.sprite_num > 0)
 		ft_raycasting_sprite(&v, 4);
-	if (!save_bmp(&v))
-		ft_error("Screenshot error.");
+	if (save_flag)
+	{
+		if (!save_bmp(&v))
+			ft_error("Screenshot error.");
+		ft_putstr("Saved screenshot (screenshot.bmp) in exec directory.\n");
+		exit(0);
+	}
 	mlx_loop_hook(v.mlx, ft_move, &v);
 	ft_print_cond("> ft_cub3d: drawn frame, starting mlx loop", VERBOSE);
 	mlx_loop(v.mlx);

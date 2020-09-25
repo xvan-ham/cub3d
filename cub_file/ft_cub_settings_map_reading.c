@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/22 18:57:35 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/25 19:18:39 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ void		ft_print_tmp_map(t_str_list *tmp_map)
 	ft_putstr("\n");
 	while (tmp_map && tmp_map->next)
 	{
-		ft_putstr("struct str: "); 
+		ft_putstr("struct str: ");
 		ft_putstr(tmp_map->str);
 		ft_putstr("\n");
 		tmp_map = tmp_map->next;
 	}
-	ft_putstr("struct str: "); 
+	ft_putstr("struct str: ");
 	ft_putstr(tmp_map->str);
 	ft_putstr("\n");
 }

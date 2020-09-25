@@ -1,5 +1,19 @@
 # Changelog - Master
 
+### v1.0
+* Fixed a bug that could result in segfault (*tex_pos* could have value -1).
+* Cub file error handling has been extensively tested.
+* Added screenshot capability!
+* Fixed all runtime memory leaks.
+* Cleaned/restructured source code for norminette compliance (added *ft_sprites_sort.c*).
+* Fixed memory when freeing *get_next_line* lines.
+* Added 2 constants to *ft_cub3d.h*: _VERBOSE_; *PRINT_MAPS*. If these are changed from _0_ to _1_, they will print extra program info during runtime and all the intermediary maps in case of the latter.
+* Now represents sprites correcly (not norminette compliant - still needs doing).
+* Added fully functional sprite-sorting algorithm.
+* Added sprite related variables to main program structure (*t_vectors*).
+* Added new structure for sprites (*t_sprites*).
+* *ft_cub_settings_map_floodcheck.c* now also adds the sprites to the sprite array when the flooding encounters a sprite id on the map.
+
 ### v0.5
 * Added _texture_ info processing in _.cub_ file, including error checking.
 * Added _sprite_ info processing in _.cub_ file, including error checking. Sprite will only be loaded if a sprite is present in the map.

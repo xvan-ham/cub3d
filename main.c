@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 20:10:45 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/24 20:27:20 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/25 19:20:21 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_check_cubfile(char *s)
 
 static int	ft_check_save_flag(char *s, int *save_flag)
 {
-	if (!s)	
+	if (!s)
 		return (1);
 	if (!ft_strstr(s, "--save"))
 	{
@@ -41,10 +41,9 @@ static int	ft_check_save_flag(char *s, int *save_flag)
 	}
 	*save_flag = 1;
 	return (0);
-	
 }
 
-int	main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int	err;
 	int	save_flag;
