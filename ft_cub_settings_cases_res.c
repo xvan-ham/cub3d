@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:23:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/22 20:20:02 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/28 19:55:45 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 static void	ft_sort_res_cases(t_vectors *v, int width, int height)
 {

@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:34:49 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/24 18:29:28 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/29 18:35:18 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 static void	ft_check_print(int flag, t_str_list *tmp_map)
 {
@@ -77,7 +77,8 @@ void		ft_process_cub_file(t_vectors *v, const char *cub_file)
 			ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
 	}
 	ft_error_check(v, n);
-	ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
+	if (ft_strlen(line) > 0)
+		ft_parse_line(v, line, &tmp_map, &flag_parsing_map);
 	close(fd);
 	ft_map_checks(v, tmp_map);
 }

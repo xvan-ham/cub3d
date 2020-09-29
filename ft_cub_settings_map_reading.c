@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 17:06:32 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/25 19:18:39 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/28 19:55:46 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 static int	ft_count_sprites(const char *s)
 {

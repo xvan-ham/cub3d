@@ -1,5 +1,8 @@
 # Changelog - Master
 
+### v1.01
+* Adapted Makefile for project delivery.
+
 ### v1.0
 * Fixed a bug that could result in segfault (*tex_pos* could have value -1).
 * Cub file error handling has been extensively tested.

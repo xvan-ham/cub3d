@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 16:56:10 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/23 20:18:01 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/28 19:55:49 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 t_str_list	*ft_str_list_new_element(const char *s)
 {

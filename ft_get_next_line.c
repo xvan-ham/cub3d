@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 19:35:01 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 18:44:34 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/29 18:23:59 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 /*
 ** Function: size_t	ft_strlen_delim(const char *s, char delim)

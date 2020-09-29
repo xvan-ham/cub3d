@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:36:13 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 19:54:38 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/28 19:55:49 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 int		ft_strlen(const char *s)
 {

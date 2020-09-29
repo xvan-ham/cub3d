@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 19:36:29 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/15 18:44:52 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/28 19:55:48 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 /*
 ** Function: char	char	*ft_strdup(const char *src)
