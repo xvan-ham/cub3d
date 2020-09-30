@@ -1,5 +1,8 @@
 # Changelog - Dev Branch
 
+### v1.02
+* Changed Makefile to work correctly with folder structure.
+
 ### v1.0
 * Fixed a bug that could result in segfault (*tex_pos* could have value -1).
 * Cub file error handling has been extensively tested.

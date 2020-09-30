@@ -1,5 +1,9 @@
 # Changelog - Master
 
+### v1.02
+* Placed source files in folders as it was in _v1.0_.
+* Changed Makefile to work correctly with folder structure.
+
 ### v1.01
 * Adapted Makefile for project delivery.
 

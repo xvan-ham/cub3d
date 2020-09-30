@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:35:23 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/28 19:55:46 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/30 16:37:28 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
 static int	ft_get_map_height(t_vectors *v, t_str_list *tmp_map)
 {

@@ -6,11 +6,11 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 19:21:51 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/28 19:55:44 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/09/30 16:37:24 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include <cub3d.h>
 
 void		ft_cases_floor(t_vectors *v, const char *str)
 {
