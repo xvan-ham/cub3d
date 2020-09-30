@@ -1,5 +1,8 @@
 # Changelog - Dev Branch
 
+### v1.025
+* Deleted test source-file *dummy.c*.
+
 ### v1.02
 * Changed Makefile to work correctly with folder structure.
 

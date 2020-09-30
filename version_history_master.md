@@ -1,5 +1,8 @@
 # Changelog - Master
 
+### v1.025
+
+* Deleted test source-file *dummy.c*.
 ### v1.02
 * Placed source files in folders as it was in _v1.0_.
 * Changed Makefile to work correctly with folder structure.
