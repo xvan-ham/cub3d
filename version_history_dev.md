@@ -1,5 +1,9 @@
 # Changelog - Dev Branch
 
+### v1.03
+* Fixed an issue when a portion of map is isolated and contains sprites (in the isolated section). Now map does not render nor make calculations on sprites located in an isolated portions of the map (not accessible to player by walking).
+* Updated *README*.
+
 ### v1.025
 * Deleted test source-file *dummy.c*.
 

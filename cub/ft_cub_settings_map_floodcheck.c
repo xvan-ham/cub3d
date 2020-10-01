@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/14 16:34:04 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/30 16:37:29 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:49:52 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	ft_flood_fill(t_vectors *v, char **map, int x, int y)
 		{
 			map[y][x] = 'Y';
 			ft_add_sprite(v, x, y);
+			v->sprite_num++;
 		}
 		else
 			map[y][x] = 'Z';

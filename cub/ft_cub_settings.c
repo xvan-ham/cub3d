@@ -6,7 +6,7 @@
 /*   By: xvan-ham <xvan-ham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:34:49 by xvan-ham          #+#    #+#             */
-/*   Updated: 2020/09/30 16:37:32 by xvan-ham         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:49:07 by xvan-ham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	ft_map_checks(t_vectors *v, t_str_list *tmp_map)
 	ft_create_map(v, tmp_map);
 	ft_load_player_position(v);
 	ft_allocate_sprite_arrays(v);
+	v->sprite_num = 0;
 	ft_floodcheck(v, v->pos_x, v->pos_y);
 	ft_str_list_delete(tmp_map);
 }
